@@ -1,5 +1,5 @@
 /** Subtipo del TAD {@link Lado} que representa los Lados que componen
-* al TAD {@link GrafoNoDirigido}.
+* al TAD {@link GrafoNoDirigido}.	
 */
 
 public class Arista<E> extends Lado<E> {
@@ -42,11 +42,11 @@ public class Arista<E> extends Lado<E> {
 	@Override
 	public String toString(Lado l) {
 		return "Informacion del Arista: \n" + 
-		"Identificador:	" + l.getId(l) + "\n" +
-		"Tipo de dato:	" + l.getDato(l).getClass().getSimpleName() + "\n" +
-		"Dato:			" + l.getDato(l) + "\n" +
-		"Peso: 			" + l.getPeso(l) + "\n" +
-		"Vertice 1: 	" + u.toString(u) + "\n" +
-		"Vertice 2: 	" + v.toString(v) + "\n";
+			"Identificador:	" + l.getId(l) + "\n" +
+			"Tipo de dato:	" + l.getDato(l).getClass().getSimpleName() + "\n" +
+			"Dato:			" + l.getDato(l) + "\n" +
+			"Peso: 			" + l.getPeso(l) + "\n" +
+			"Vertice 1: 	" + u.toString(u) + "\n" +
+			"Vertice 2: 	" + v.toString(v) + "\n";
 	}
 }

@@ -42,11 +42,11 @@ public class Arco<E> extends Lado<E> {
 	@Override
 	public String toString(Lado l) {
 		return "Informacion del Arco: \n" + 
-		"Identificador:		" + l.getId(l) + "\n" +
-		"Tipo de dato:		" + l.getDato(l).getClass().getSimpleName() + "\n" +
-		"Dato:				" + l.getDato(l) + "\n" +
-		"Peso: 				" + l.getPeso(l) + "\n" +
-		"Vertice inicial: 	" + vi.toString(vi) + "\n" +
-		"Vertice final: 	" + vf.toString(vf) + "\n";
+			"Identificador:		" + l.getId(l) + "\n" +
+			"Tipo de dato:		" + l.getDato(l).getClass().getSimpleName() + "\n" +
+			"Dato:				" + l.getDato(l) + "\n" +
+			"Peso: 				" + l.getPeso(l) + "\n" +
+			"Vertice inicial: 	" + vi.toString(vi) + "\n" +
+			"Vertice final: 	" + vf.toString(vf) + "\n";
 	}
 }
