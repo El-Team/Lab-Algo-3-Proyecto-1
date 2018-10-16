@@ -53,10 +53,9 @@ public class Vertice<E> {
 	* 		@return 	<code>String</code> con toda la informacion del vertice
 	*/
 	public String toString(Vertice<E> v) {
-		return "Informacion del vertice:\n" +
-			"Tipo de dato:	" + v.getDato(v).getClass().getSimpleName() + "\n" +
-			"Identificador:	" + v.getId(v) + "\n" +
-			"Dato: 			" + v.getDato(v) + "\n" +
-			"Peso: 			" + v.getPeso(v) + "\n";
+		return "Vertice \"" + v.getId(v) + "\":\n" +
+			"	Tipo de dato:		" + v.getDato(v).getClass().getSimpleName() + "\n" +
+			"	Dato:		" + v.getDato(v) + "\n" +
+			"	Peso:		" + v.getPeso(v) + "\n";
 	}
 }

@@ -41,12 +41,11 @@ public class Arista<E> extends Lado<E> {
 	/** {@inheritDoc} **/
 	@Override
 	public String toString(Lado l) {
-		return "Informacion del Arista: \n" + 
-			"Identificador:	" + l.getId(l) + "\n" +
+		return "Arista \"" + l.getId(l) + "\":\n" + 
 			"Tipo de dato:	" + l.getDato(l).getClass().getSimpleName() + "\n" +
-			"Dato:			" + l.getDato(l) + "\n" +
-			"Peso: 			" + l.getPeso(l) + "\n" +
-			"Vertice 1: 	" + u.toString(u) + "\n" +
-			"Vertice 2: 	" + v.toString(v) + "\n";
+			"Dato:	" + l.getDato(l) + "\n" +
+			"Peso:	" + l.getPeso(l) + "\n" +
+			"Vertice 1:	" + u.toString(u) + "\n" +
+			"Vertice 2:	" + v.toString(v) + "\n";
 	}
 }
