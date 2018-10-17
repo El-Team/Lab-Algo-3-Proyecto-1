@@ -7,11 +7,11 @@
 public class Vertice<E> {
 
 	/** Identificador asociado al vertice **/
-	String id;
+	private String id;
 	/** Dato que se quiere almacenar en el vertice **/
-	E dato;
+	private E dato;
 	/** Peso asociado al vertice**/
-	double peso;
+	private double peso;
 
 	/** Constructor del TAD Vertice: 
 	* 		@param id 	representa el identificador
