@@ -25,37 +25,33 @@ public class Vertice<E> {
 	}
 
 	/** Funcion para obtener el peso del vertice
-	* 		@param v 	Vertice
 	* 		@return 	Peso asociado al vertice
 	*/
-	public double getPeso(Vertice<E> v) {
-		return v.peso;
+	public double getPeso() {
+		return this.peso;
 	}
 
 	/** Funcion para obtener el identificador del vertice
-	* 		@param v 	Vertice
 	* 		@return 	Identificador del vertice
 	*/
-	public String getId(Vertice<E> v) {
-		return v.id;
+	public String getId() {
+		return this.id;
 	}
 
 	/** Funcion para obtener el dato del vertice
-	* 		@param v 	Vertice
 	* 		@return 	dato almacenado en el vertice
 	*/
-	public E getDato(Vertice<E> v) {
-		return v.dato;
+	public E getDato() {
+		return this.dato;
 	}
 
 	/** Funcion para obtener toda la informacion del vertice
-	* 		@param v 	Vertice
 	* 		@return 	<code>String</code> con toda la informacion del vertice
 	*/
-	public String toString(Vertice<E> v) {
-		return "Vertice \"" + v.getId(v) + "\":\n" +
-			"	Tipo de dato:		" + v.getDato(v).getClass().getSimpleName() + "\n" +
-			"	Dato:		" + v.getDato(v) + "\n" +
-			"	Peso:		" + v.getPeso(v) + "\n";
+	public String toString() {
+		return "Vertice \"" + this.id + "\":\n" +
+			"	Tipo de dato:		" + this.dato.getClass().getSimpleName() + "\n" +
+			"	Dato:		" + this.dato + "\n" +
+			"	Peso:		" + this.peso + "\n";
 	}
 }
