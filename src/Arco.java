@@ -1,4 +1,5 @@
-/** Subtipo del TAD {@link Lado} que representa los Lados que componen
+/**
+* Subtipo del TAD {@link Lado} que representa los Lados que componen
 * al TAD {@link GrafoDirigido}.
 */
 

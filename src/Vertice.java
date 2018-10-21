@@ -1,4 +1,5 @@
-/** Clase <code>Vertice</code> representa un tipo de dato que posee
+/**
+* Clase <code>Vertice</code> representa un tipo de dato que posee
 * el {@link Grafo}. Se identifica con {@link id} y su informacion
 * principal se guarda en {@link dato}. Tambien tienen un {@link peso}
 * asociado a ellos
@@ -10,7 +11,7 @@ public class Vertice<E> {
 	private String id;
 	/** Dato que se quiere almacenar en el vertice **/
 	private E dato;
-	/** Peso asociado al vertice**/
+	/** Peso asociado al vertice **/
 	private double peso;
 
 	/** Constructor del TAD Vertice: 

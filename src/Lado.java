@@ -1,10 +1,9 @@
-/** Clase <code>Lado</code> representa un tipo de dato que posee
+/**
+* Clase <code>Lado</code> representa un tipo de dato que posee
 * el {@link Grafo}. Se identifica con {@link id} y su informacion
 * principal se guarda en {@link dato}. Tambien tienen un {@link peso}
 * asociado a ellos
 */
-
-
 
 public abstract class Lado<E> {
 
