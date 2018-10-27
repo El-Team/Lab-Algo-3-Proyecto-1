@@ -26,33 +26,29 @@ public abstract class Lado<E> {
 	}
 
 	/** Funcion para obtener el peso del Lado
-	* 		@param l 	Lado
 	* 		@return 	Peso asociado al Lado
 	*/
-	public double getPeso(Lado l) {
-		return l.peso;
+	public double getPeso() {
+		return this.peso;
 	}
 
 	/** Funcion para obtener el identificador del Lado
-	* 		@param l 	Lado
 	* 		@return 	Identificador del Lado
 	*/
-	public String getId(Lado l) {
-		return l.id;
+	public String getId() {
+		return this.id;
 	}
 
 	/** Funcion para obtener el dato del Lado
-	* 		@param v 	Vertice
 	* 		@return 	dato almacenado en el Lado
 	*/
-	public E getDato(Lado l) {
-		return (E) l.dato;
+	public E getDato() {
+		return this.dato;
 	}
 
 	/** Funcion para obtener toda la informacion del Lado
-	* 		@param v 	Lado
 	* 		@return 	<code>String</code> con toda la informacion del Lado
 	*/
-	public abstract String toString(Lado l);
+	public abstract String toString();
 
 }

@@ -24,29 +24,27 @@ public class Arco<E> extends Lado<E> {
 	}
 
 	/** Obtiene el {@link Vertice} que es el extremo inicial del arco
-	* 		@param a 	Arco
 	* 		@return 	Vertice inicial
 	*/
-	public Vertice<E> getExtremoInicial(Arco<E> a) {
-		return a.vi;
+	public Vertice<E> getExtremoInicial() {
+		return this.vi;
 	}
 
 	/** Obtiene el {@link Vertice} que es el extremo final del arco
-	* 		@param a 	Arco
 	* 		@return 	Vertice final
 	*/
-	public Vertice<E> getExtremoFinal(Arco<E> a) {
-		return a.vf;
+	public Vertice<E> getExtremoFinal() {
+		return this.vf;
 	}
 
 	/** {@inheritDoc} **/
 	@Override
-	public String toString(Lado l) {
-		return "Arco: \"" + l.getId(l) + "\":\n" + 
-			"Tipo de dato:	" + l.getDato(l).getClass().getSimpleName() + "\n" +
-			"Dato:	" + l.getDato(l) + "\n" +
-			"Peso:	" + l.getPeso(l) + "\n" +
-			"Vertice inicial:	" + vi.toString(vi) + "\n" +
-			"Vertice final:	" + vf.toString(vf) + "\n";
+	public String toString() {
+		return "Arco: \"" + this.id + "\":\n" + 
+			"Tipo de dato:	" + this.dato.getClass().getSimpleName() + "\n" +
+			"Dato:	" + this.dato + "\n" +
+			"Peso:	" + this.peso + "\n" +
+			"Vertice inicial:	" + this.vi.toString() + "\n" +
+			"Vertice final:	" + this.vf.toString() + "\n";
 	}
 }
