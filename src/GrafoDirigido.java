@@ -2,125 +2,143 @@
  * Este TAD es un subtipo de la inerfaz {@link Grafo}. Como su nombre lo indica,
  * representa a un digrafo.
  */
+import java.util.ArrayList;
 
-public class GrafoDirigido implements Grafo {
-		/**
+public class GrafoDirigido<V, L> implements Grafo<V, L> {
+	
+	/**
+	 * Crea un nuevo GrafoDirigido
+	 */
+	public <V,L>GrafoDirigido() {
+		
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	public boolean cargarGrafo(Grafo<V,L> g, String archivo) {
-		return ;
+		return false;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public int numeroDeVertices(Grafo<V,L> g) {
-		return ;
+		return 0;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public int numeroDeLados(Grafo<V,L> g) {
-		return ;
+		return 0;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean agregarVertice(Grafo<V,L> g, Vértice<V> v) {
-		return ;
+	public boolean agregarVertice(Grafo<V,L> g, Vertice<V> v) {
+		return false;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public boolean agregarVertice(Grafo<V,L> g, String id, V dato, double p) {
-		return ;
+		return false;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public Vertice<V> obtenerVertice(Grafo<V,L> g, String id) {
-		return ;
+		return new Vertice<>("", null, 0);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean pestaVertice(Grafo<V,L> g, String id) {
-		return ;
+	public boolean estaVertice(Grafo<V,L> g, String id) {
+		return false;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public boolean estaLado(Grafo<V,L> g, String u, String v) {
-		return ;
+		return false;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public boolean eliminarVertice(Grafo<V,L> g, String id) {
-		return ;
+		return false;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<Vertice<V>> vertices(Grafo<V,L> g) {
-		return ;
+	public ArrayList<Vertice<V>> vertices(Grafo<V,L> g) {
+		Vertice v = new Vertice<>("", "", 0);
+		ArrayList<Vertice<V>> a = new ArrayList<Vertice<V>>();
+		a.add(v);
+		return a;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<Lado<L>> lados(Grafo<V,L> g) {
-		return ;
+	public ArrayList<Lado<L>> lados(Grafo<V,L> g) {
+		Vertice v1 = new Vertice<>("", "", 0);
+		Vertice v2 = new Vertice<>("", "", 0);
+		Arco l = new Arco<>("", "", 0, v1, v2);
+		ArrayList<Lado<L>> a = new ArrayList<Lado<L>>();
+		a.add(l);
+		return a;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public int grado(Grafo<V,L> g, String id) {
-		return ;
+		return 0;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<Vertice<V>> adyacentes(Grafo<V,L> g, String id) {
-		return ;
+	public ArrayList<Vertice<V>> adyacentes(Grafo<V,L> g, String id) {
+		Vertice v = new Vertice<>("", "", 0);
+		ArrayList<Vertice<V>> a = new ArrayList<Vertice<V>>();
+		a.add(v);
+		return a;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public List<Lado<E>> incidentes(Grafo<V,L> g, String id) {
-		return ;
+	public ArrayList<Lado<L>> incidentes(Grafo<V,L> g, String id) {
+		Vertice v1 = new Vertice<>("", "", 0);
+		Vertice v2 = new Vertice<>("", "", 0);
+		Arco l = new Arco<>("", "", 0, v1, v2);
+		ArrayList<Lado<L>> a = new ArrayList<Lado<L>>();
+		a.add(l);
+		return a;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public Grafo clone(Grafo<V,L> g) {
-		return ;
+		return g;
 	};
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public String toString(Grafo<V,L> g) {
-		return ;
-	}
-
-	/**
-	 * Crea un nuevo GrafoDirigido
-	 */
-	public GrafoDirigido<V,L> crearGrafoDirigido<V,L>() {
-		return ;
+		return "";
 	}
 
 	/**
@@ -128,7 +146,7 @@ public class GrafoDirigido implements Grafo {
 	 * Retorna true en caso en que la inserción se lleva a cabo, false en caso contrario.
 	 */
 	public boolean agregarArco(Grafo<V,L> g, Arco<L> a) {
-		return ;
+		return false;
 	}
 
 	/**
@@ -136,7 +154,7 @@ public class GrafoDirigido implements Grafo {
 	 * Retorna true en caso en que la inserción se lleva a cabo, false en contrario.
 	 */
 	public boolean agregarArco(Grafo<V,L> g, String id, L dato, double p, String vInicial, String vFinal) {
-		return ;
+		return false;
 	}
 
 	/**
@@ -144,7 +162,7 @@ public class GrafoDirigido implements Grafo {
 	 * el arco del grafo y false en caso que no exista un arco con ese identificador en el grafo.
 	 */
 	public boolean eliminarArco(Grafo<V,L> g, String id) {
-		return ;
+		return false;
 	}
 
 	/**
@@ -152,7 +170,9 @@ public class GrafoDirigido implements Grafo {
 	 * identificador, se lanza la excepción NoSuchElementException.
 	 */
 	public Arco obtenerArco(Grafo<V,L> g, String id) {
-		return ;
+		Vertice v1 = new Vertice<>("", "", 0);
+		Vertice v2 = new Vertice<>("", "", 0);
+		return new Arco<>("", "", 0, v1, v2);
 	}
 
 	/**
@@ -160,7 +180,7 @@ public class GrafoDirigido implements Grafo {
 	 * vértice con ese identificador, se lanza la excepción NoSuchElementException.
 	 */
 	public int gradoInterior(Grafo<V,L> g, String id) {
-		return ;
+		return 0;
 	}
 
 	/**
@@ -168,23 +188,29 @@ public class GrafoDirigido implements Grafo {
 	 * vértice con ese identificador, se lanza la excepción NoSuchElementException.
 	 */
 	public int gradoExterior(Grafo<V,L> g, String id) {
-		return ;
+		return 0;
 	}
 
 	/**
 	 * Devuelve una lista con los vértices que sucesores del vértice con identificador id. En caso de que no
 	 * exista ningún vértice con ese identificador, se lanza la excepción NoSuchElementException.
 	 */
-	public List<Vertice<V>> sucesores(Grafo<V,L> g, String id) {
-		return ;
+	public ArrayList<Vertice<V>> sucesores(Grafo<V,L> g, String id) {
+		Vertice v = new Vertice<>("", "", 0);
+		ArrayList<Vertice<V>> a = new ArrayList<Vertice<V>>();
+		a.add(v);
+		return a;
 	}
 
 	/**
 	 * Devuelve una lista con los vértices predecesores del vértice con identificador id. En caso de que no
 	 * exista ningún vértice con ese identificador, se lanza la excepción NoSuchElementException.
 	 */
-	public List<Vertice<V>> predecesores(Grafo<V,L> g, String id) {
-		return ;
+	public ArrayList<Vertice<V>> predecesores(Grafo<V,L> g, String id) {
+		Vertice v = new Vertice<>("", "", 0);
+		ArrayList<Vertice<V>> a = new ArrayList<Vertice<V>>();
+		a.add(v);
+		return a;
 	}
 
 }
