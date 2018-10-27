@@ -1,6 +1,7 @@
 /**
  * Contiene las operaciones asociadas a un grafo, sea dirigido o no dirigido.
  */
+import java.util.List;
 
 public interface Grafo<V, L> {
 
@@ -28,7 +29,7 @@ public interface Grafo<V, L> {
 	 * con el mismo identificador que el vértice v, entonces lo agrega al grafo y retorna true, de lo
 	 * contrario retorna false.
 	 */
-	public boolean agregarVertice(Grafo<V,L> g, Vértice<V> v);
+	public boolean agregarVertice(Grafo<V,L> g, Vertice<V> v);
 
 	/**
 	 * Crea un vértice con las características dadas y las agrega al grafo g previamente creado. Si en el grafo
@@ -48,7 +49,7 @@ public interface Grafo<V, L> {
 	 * Se indica si un vértice con el identificador id, se encuentra o no en el grafo. Retorna true en caso de
 	 * que el vértice pertenezca al grafo, false en caso contrario.
 	 */
-	public boolean pestaVertice(Grafo<V,L> g, String id);
+	public boolean estaVertice(Grafo<V,L> g, String id);
 
 	/**
 	 * Determina si un lado pertenece a un grafo. La entrada son los identificadores de los vértices que son
@@ -91,7 +92,7 @@ public interface Grafo<V, L> {
 	 * caso que en el grafo no contenga ningún vértice con el identificador id, se lanza la excepción
 	 * NoSuchElementException.
 	 */
-	public List<Lado<E>> incidentes(Grafo<V,L> g, String id);
+	public List<Lado<L>> incidentes(Grafo<V,L> g, String id);
 
 	/**
 	 * Retorna un nuevo grafo con la misma composición que el grafo de entrada.
