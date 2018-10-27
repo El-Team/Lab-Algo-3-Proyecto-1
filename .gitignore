@@ -1,3 +1,4 @@
 *.swp
 *.class
+.fuse_hidden*
 
