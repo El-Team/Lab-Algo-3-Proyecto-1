@@ -1,4 +1,5 @@
 *.swp
 *.class
 .fuse_hidden*
+.vscode/
 
