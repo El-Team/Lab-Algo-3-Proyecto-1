@@ -2,6 +2,7 @@
  * Programa cliente que permite hacer uso de las funcionalidades de las clases
  * que implementan la interfaz Grafo.
  */
+import java.io.File;
 import java.lang.IllegalArgumentException;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
@@ -12,8 +13,11 @@ public class ClienteGrafo {
 	 * Verifica que el archivo exista
 	 */
 	private static boolean isValidPath(String filename) {
-		// use a regex
-		return true;
+		File tmpFile = new File(filename);
+		if (tmpFile.exists()) {
+			return true;
+		}
+		return false;
 	}
 
 	/**
