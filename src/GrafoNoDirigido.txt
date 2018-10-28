@@ -1,0 +1,10 @@
+S
+S
+N
+3
+2
+v01 Caracas 1
+v02 Valencia 1
+v03 PtoCabello 1
+l01 ARC 155 v01 v02
+l02 AutValPtoCab 50 v02 v03
