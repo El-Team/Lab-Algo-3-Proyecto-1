@@ -31,12 +31,15 @@ public class ClienteGrafo {
 		}
 		catch(IllegalArgumentException e) {
 			System.out.println("Introduzca únicamente el nombre del archivo como argumento");
+			System.exit(0);
 		}
 		catch(FileNotFoundException e) {
 			System.out.println("No fue posible importar el archivo, verifique que el nombre es el correcto");
+			System.exit(0);
 		}
 		catch(ParseException e) {
 			System.out.println("El documento no tiene el formato correcto");
+			System.exit(0);
 		}
 	}
 
