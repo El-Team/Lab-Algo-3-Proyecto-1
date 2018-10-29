@@ -56,7 +56,6 @@ public class ClienteGrafo {
 		for (String line : lines) {
 			fileContent += line;
 			fileContent += ",";
-			System.out.println(fileContent);
 		}
 
 		String regexStr =
