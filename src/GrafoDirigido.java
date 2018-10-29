@@ -3,21 +3,93 @@
  * representa a un digrafo.
  */
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.time.Instant;
+import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.charset.Charset;
+import java.io.IOException;
+import java.lang.Integer;
 
 public class GrafoDirigido<V, L> implements Grafo<V, L> {
+
+	public int vertexCount;
+	public int edgeCount;
+	public LinkedHashMap<String, Vertice<V>> vertices;
+	public LinkedHashMap<String, Lado<L>> edges;
 	
 	/**
 	 * Crea un nuevo GrafoDirigido
 	 */
 	public <V,L>GrafoDirigido() {
-		
+		this.vertexCount = 0;
+		this.edgeCount = 0;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public boolean cargarGrafo(Grafo<V,L> g, String archivo) {
-		return false;
+	public static boolean cargarGrafo(Grafo<V,L> g, String archivo) {
+
+		try {
+			if (!Utilidades.isValidPath(archivo)) {
+				throw new FileNotFoundException();
+			}
+			else if (!Utilidades.documentHasValidFormat(archivo)) {
+				throw new ParseException("", 0);
+			}
+		}
+		catch(FileNotFoundException e) {
+			System.out.println("No fue posible importar el archivo, verifique que el nombre es el correcto");
+			return false;
+		}
+		catch(ParseException e) {
+			System.out.println("El documento no tiene el formato correcto");
+			return false;
+		}
+
+		// Abrir archivo de texto
+		List<String> lines = null;
+		try {
+			lines = Files.readAllLines(
+				Paths.get(archivo),
+				Charset.defaultCharset()
+			);
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+
+
+		// Cargar datos
+
+		this.vertexCount = Integer.parseInt(lines.get(3));
+		this.edgeCount = Integer.parseInt(lines.get(4));
+
+		this.vertices = new LinkedHashMap<String, Vertice<V>>();
+		for (int i = 5; i < 5 + this.vertexCount; i++) {
+			String[] vertexData = lines.get(i).split("\\s");
+			Vertice<V> v = new Vertice<V>(
+				"v" + Instant.now().toString(),
+				(V)vertexData[1],
+				Double.parseDouble(vertexData[2])
+			);
+		}
+
+		this.edges = new LinkedHashMap<String, Lado<L>>();
+		for (int i = 5 + this.vertexCount; i < lines.size() - 1; i++) {
+			String[] edgeData = lines.get(i).split("\\s");
+			Vertice<V> v = new Vertice<V>(
+				"e" + Instant.now().toString(),
+				(V)edgeData[1],
+				Double.parseDouble(edgeData[2])
+			);
+		}
+
+		return true;
 	}
 
 	/**
