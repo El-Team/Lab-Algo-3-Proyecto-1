@@ -30,6 +30,16 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	}
 
 	/**
+	 * Getters
+	 */
+	int public getVertexCount() {
+		return this.vertexCount;
+	}
+	int public getEdgeCount() {
+		return this.edgeCount;
+	}
+
+	/**
 	 * {@inheritDoc}
 	 */
 	public static boolean cargarGrafo(Grafo<V,L> g, String archivo) {
