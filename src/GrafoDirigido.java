@@ -201,7 +201,11 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 */
 	public ArrayList<Vertice<V>> vertices(Grafo<V,L> g) {
 		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
-		return new ArrayList(castedGraph.vertices.entrySet());
+		ArrayList<Vertice<V>> vertices = new ArrayList();
+		for (String vertexId : castedGraph.vertices.keySet()) {
+			vertices.add((Vertice<V>)(castedGraph.vertices.get(vertexId)));
+		}
+		return vertices;
 	}
 
 	/**
