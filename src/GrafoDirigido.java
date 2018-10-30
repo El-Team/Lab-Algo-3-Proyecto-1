@@ -210,7 +210,11 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 */
 	public ArrayList<Lado<L>> lados(Grafo<V,L> g) {
 		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
-		return new ArrayList(castedGraph.edges.entrySet());
+		ArrayList<Lado<L>> lados = new ArrayList();
+		for (String edgeId : castedGraph.edges.keySet()) {
+			lados.add((Lado<L>)(castedGraph.edges.get(edgeId)));
+		}
+		return lados;
 	}
 
 	/**
