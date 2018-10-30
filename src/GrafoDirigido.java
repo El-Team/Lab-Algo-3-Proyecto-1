@@ -122,7 +122,14 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * {@inheritDoc}
 	 */
 	public boolean agregarVertice(Grafo<V,L> g, Vertice<V> v) {
-		return false;
+		try {
+			GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+			castedGraph.vertices.put(v.getId(), v);
+		}
+		catch(Error e) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
