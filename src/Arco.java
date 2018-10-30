@@ -6,9 +6,9 @@
 public class Arco<E> extends Lado<E> {
 
 	/** Vertice inicial del Arco**/
-	private Vertice<E> vi;
+	private Vertice vi;
 	/** Vertice final del Arco**/
-	private Vertice<E> vf;
+	private Vertice vf;
 
 	/** Constructor del TAD Arco: 
 	* 		@param id 	representa el identificador
@@ -17,7 +17,7 @@ public class Arco<E> extends Lado<E> {
 	* 		@param vi 	{@link Vertice} inicial
 	* 		@param vf 	{@link Vertice} final
 	*/
-	public Arco(String id, E dato, double p, Vertice<E> vi, Vertice<E> vf) {
+	public Arco(String id, E dato, double p, Vertice vi, Vertice vf) {
 		super(id, dato, p);
 		this.vi = vi;
 		this.vf = vf;
@@ -26,14 +26,14 @@ public class Arco<E> extends Lado<E> {
 	/** Obtiene el {@link Vertice} que es el extremo inicial del arco
 	* 		@return 	Vertice inicial
 	*/
-	public Vertice<E> getExtremoInicial() {
+	public Vertice getExtremoInicial() {
 		return this.vi;
 	}
 
 	/** Obtiene el {@link Vertice} que es el extremo final del arco
 	* 		@return 	Vertice final
 	*/
-	public Vertice<E> getExtremoFinal() {
+	public Vertice getExtremoFinal() {
 		return this.vf;
 	}
 
