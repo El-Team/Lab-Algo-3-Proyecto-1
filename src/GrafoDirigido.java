@@ -242,10 +242,21 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * {@inheritDoc}
 	 */
 	public ArrayList<Vertice<V>> adyacentes(Grafo<V,L> g, String id) {
-		Vertice v = new Vertice<>("", "", 0);
-		ArrayList<Vertice<V>> a = new ArrayList<Vertice<V>>();
-		a.add(v);
-		return a;
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+		ArrayList<Vertice<V>> adyacentes = new ArrayList();
+		if (!g.estaVertice(this, id)) {
+			throw new NoSuchElementException();
+		}
+		for (String edgeId : castedGraph.edges.keySet()) {
+			Arco<L> castedEdge = (Arco<L>)castedGraph.edges.get(edgeId);
+			if (castedEdge.getExtremoInicial().getId() == id) {
+				adyacentes.add(castedEdge.getExtremoFinal());
+			}
+			if (castedEdge.getExtremoFinal().getId() == id) {
+				adyacentes.add(castedEdge.getExtremoInicial());
+			}
+		}
+		return adyacentes;
 	}
 
 	/**
