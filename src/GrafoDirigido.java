@@ -4,7 +4,6 @@
  */
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.time.Instant;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.List;
@@ -85,7 +84,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		for (int i = 5; i < 5 + this.vertexCount; i++) {
 			String[] vertexData = lines.get(i).split("\\s");
 			Vertice<V> v = new Vertice<V>(
-				"v" + Instant.now().toString(),
+				vertexData[0],
 				(V)vertexData[1],
 				Double.parseDouble(vertexData[2])
 			);
@@ -95,7 +94,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		for (int i = 5 + this.vertexCount; i < lines.size() - 1; i++) {
 			String[] edgeData = lines.get(i).split("\\s");
 			Vertice<V> v = new Vertice<V>(
-				"e" + Instant.now().toString(),
+				edgeData[0],
 				(V)edgeData[1],
 				Double.parseDouble(edgeData[2])
 			);
