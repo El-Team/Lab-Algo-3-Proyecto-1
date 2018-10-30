@@ -13,6 +13,8 @@ import java.nio.file.Paths;
 import java.nio.charset.Charset;
 import java.io.IOException;
 import java.lang.Integer;
+import java.util.NoSuchElementException;
+
 
 public class GrafoDirigido<V, L> implements Grafo<V, L> {
 
@@ -151,7 +153,12 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * {@inheritDoc}
 	 */
 	public Vertice<V> obtenerVertice(Grafo<V,L> g, String id) {
-		return new Vertice<>("", null, 0);
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+		Vertice<V> v = castedGraph.vertices.get(id);
+		if (v == null) {
+			throw new NoSuchElementException();
+		}
+		return v;
 	}
 
 	/**
