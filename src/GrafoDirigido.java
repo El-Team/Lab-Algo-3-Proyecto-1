@@ -165,7 +165,8 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * {@inheritDoc}
 	 */
 	public boolean estaVertice(Grafo<V,L> g, String id) {
-		return false;
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+		return castedGraph.vertices.containsKey(id);
 	}
 
 	/**
