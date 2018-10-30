@@ -106,14 +106,16 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * {@inheritDoc}
 	 */
 	public int numeroDeVertices(Grafo<V,L> g) {
-		return 0;
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+		return castedGraph.getVertexCount();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	public int numeroDeLados(Grafo<V,L> g) {
-		return 0;
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+		return castedGraph.getEdgeCount();
 	}
 
 	/**
