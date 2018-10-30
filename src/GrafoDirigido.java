@@ -190,6 +190,10 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * {@inheritDoc}
 	 */
 	public boolean eliminarVertice(Grafo<V,L> g, String id) {
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+		if (castedGraph.vertices.remove(id) != null) {
+			return true;
+		}
 		return false;
 	}
 
