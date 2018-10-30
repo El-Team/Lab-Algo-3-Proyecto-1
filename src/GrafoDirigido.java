@@ -173,6 +173,16 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * {@inheritDoc}
 	 */
 	public boolean estaLado(Grafo<V,L> g, String u, String v) {
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+		for (String edgeId : castedGraph.edges.keySet()) {
+			Arco<L> castedEdge = (Arco<L>)castedGraph.edges.get(edgeId);
+			if (
+				castedEdge.getExtremoInicial().getId() == u &&
+				castedEdge.getExtremoFinal().getId() == v
+			) {
+				return true;
+			}
+		}
 		return false;
 	}
 
