@@ -201,10 +201,8 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * {@inheritDoc}
 	 */
 	public ArrayList<Vertice<V>> vertices(Grafo<V,L> g) {
-		Vertice v = new Vertice<>("", "", 0);
-		ArrayList<Vertice<V>> a = new ArrayList<Vertice<V>>();
-		a.add(v);
-		return a;
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+		return new ArrayList(castedGraph.vertices.entrySet());
 	}
 
 	/**
