@@ -217,7 +217,21 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * {@inheritDoc}
 	 */
 	public int grado(Grafo<V,L> g, String id) {
-		return 0;
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+		int grado = 0;
+		if (!g.estaVertice(this, id)) {
+			throw new NoSuchElementException();
+		}
+		for (String edgeId : castedGraph.edges.keySet()) {
+			Arco<L> castedEdge = (Arco<L>)castedGraph.edges.get(edgeId);
+			if (
+				castedEdge.getExtremoInicial().getId() == id ||
+				castedEdge.getExtremoFinal().getId() == id
+			) {
+				grado++;
+			}
+		}
+		return grado;
 	}
 
 	/**
