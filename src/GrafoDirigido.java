@@ -31,13 +31,19 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	}
 
 	/**
-	 * Getters
+	 * Getters y setters
 	 */
 	public int getVertexCount() {
 		return this.vertexCount;
 	}
 	public int getEdgeCount() {
 		return this.edgeCount;
+	}
+	public void setVertexCount(int n) {
+		this.vertexCount = n;
+	}
+	public void setEdgeCount(int m) {
+		this.edgeCount = m;
 	}
 
 	/**
