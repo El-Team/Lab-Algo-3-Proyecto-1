@@ -413,6 +413,10 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * el arco del grafo y false en caso que no exista un arco con ese identificador en el grafo.
 	 */
 	public boolean eliminarArco(Grafo<V,L> g, String id) {
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+		if (castedGraph.getEdges().remove(id) != null) {
+			return true;
+		}
 		return false;
 	}
 
