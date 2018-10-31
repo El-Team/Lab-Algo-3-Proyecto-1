@@ -394,8 +394,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 			double p,
 			String vInicial,
 			String vFinal
-		)
-		throws NoSuchElementException {
+		) {
 
 		try {
 			GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
