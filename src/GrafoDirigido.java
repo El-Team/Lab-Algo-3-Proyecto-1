@@ -19,8 +19,8 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 
 	private int vertexCount;
 	private int edgeCount;
-	public LinkedHashMap<String, Vertice<V>> vertices;
-	public LinkedHashMap<String, Lado<L>> edges;
+	private LinkedHashMap<String, Vertice<V>> vertices;
+	private LinkedHashMap<String, Lado<L>> edges;
 	
 	/**
 	 * Crea un nuevo GrafoDirigido
@@ -38,6 +38,12 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	}
 	public int getEdgeCount() {
 		return this.edgeCount;
+	}
+	public LinkedHashMap<String, Vertice<V>> getVertices() {
+		return this.vertices;
+	}
+	public LinkedHashMap<String, Lado<L>> getEdges() {
+		return this.edges;
 	}
 	public void setVertexCount(int n) {
 		this.vertexCount = n;
@@ -131,7 +137,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	public boolean agregarVertice(Grafo<V,L> g, Vertice<V> v) {
 		try {
 			GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
-			castedGraph.vertices.put(v.getId(), v);
+			castedGraph.getVertices().put(v.getId(), v);
 		}
 		catch(Error e) {
 			return false;
@@ -146,7 +152,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		try {
 			GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 			Vertice<V> v = new Vertice<V>(id, dato, p);
-			castedGraph.vertices.put(id, v);	
+			castedGraph.getVertices().put(id, v);	
 		}
 		catch(Error e) {
 			return false;
@@ -159,7 +165,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 */
 	public Vertice<V> obtenerVertice(Grafo<V,L> g, String id) {
 		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
-		Vertice<V> v = castedGraph.vertices.get(id);
+		Vertice<V> v = castedGraph.getVertices().get(id);
 		if (v == null) {
 			throw new NoSuchElementException();
 		}
@@ -171,7 +177,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 */
 	public boolean estaVertice(Grafo<V,L> g, String id) {
 		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
-		return castedGraph.vertices.containsKey(id);
+		return castedGraph.getVertices().containsKey(id);
 	}
 
 	/**
@@ -179,8 +185,8 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 */
 	public boolean estaLado(Grafo<V,L> g, String u, String v) {
 		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
-		for (String edgeId : castedGraph.edges.keySet()) {
-			Arco<L> castedEdge = (Arco<L>)castedGraph.edges.get(edgeId);
+		for (String edgeId : castedGraph.getEdges().keySet()) {
+			Arco<L> castedEdge = (Arco<L>)castedGraph.getEdges().get(edgeId);
 			if (
 				castedEdge.getExtremoInicial().getId() == u &&
 				castedEdge.getExtremoFinal().getId() == v
@@ -196,7 +202,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 */
 	public boolean eliminarVertice(Grafo<V,L> g, String id) {
 		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
-		if (castedGraph.vertices.remove(id) != null) {
+		if (castedGraph.getVertices().remove(id) != null) {
 			return true;
 		}
 		return false;
@@ -208,8 +214,8 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	public ArrayList<Vertice<V>> vertices(Grafo<V,L> g) {
 		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 		ArrayList<Vertice<V>> vertices = new ArrayList();
-		for (String vertexId : castedGraph.vertices.keySet()) {
-			vertices.add((Vertice<V>)(castedGraph.vertices.get(vertexId)));
+		for (String vertexId : castedGraph.getVertices().keySet()) {
+			vertices.add((Vertice<V>)(castedGraph.getVertices().get(vertexId)));
 		}
 		return vertices;
 	}
@@ -220,8 +226,8 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	public ArrayList<Lado<L>> lados(Grafo<V,L> g) {
 		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 		ArrayList<Lado<L>> lados = new ArrayList();
-		for (String edgeId : castedGraph.edges.keySet()) {
-			lados.add((Lado<L>)(castedGraph.edges.get(edgeId)));
+		for (String edgeId : castedGraph.getEdges().keySet()) {
+			lados.add((Lado<L>)(castedGraph.getEdges().get(edgeId)));
 		}
 		return lados;
 	}
@@ -235,8 +241,8 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		if (!g.estaVertice(this, id)) {
 			throw new NoSuchElementException();
 		}
-		for (String edgeId : castedGraph.edges.keySet()) {
-			Arco<L> castedEdge = (Arco<L>)castedGraph.edges.get(edgeId);
+		for (String edgeId : castedGraph.getEdges().keySet()) {
+			Arco<L> castedEdge = (Arco<L>)castedGraph.getEdges().get(edgeId);
 			if (
 				castedEdge.getExtremoInicial().getId() == id ||
 				castedEdge.getExtremoFinal().getId() == id
@@ -256,8 +262,8 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		if (!g.estaVertice(this, id)) {
 			throw new NoSuchElementException();
 		}
-		for (String edgeId : castedGraph.edges.keySet()) {
-			Arco<L> castedEdge = (Arco<L>)castedGraph.edges.get(edgeId);
+		for (String edgeId : castedGraph.getEdges().keySet()) {
+			Arco<L> castedEdge = (Arco<L>)castedGraph.getEdges().get(edgeId);
 			if (castedEdge.getExtremoInicial().getId() == id) {
 				adyacentes.add(castedEdge.getExtremoFinal());
 			}
@@ -277,8 +283,8 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		if (!g.estaVertice(this, id)) {
 			throw new NoSuchElementException();
 		}
-		for (String edgeId : castedGraph.edges.keySet()) {
-			Arco<L> castedEdge = (Arco<L>)castedGraph.edges.get(edgeId);
+		for (String edgeId : castedGraph.getEdges().keySet()) {
+			Arco<L> castedEdge = (Arco<L>)castedGraph.getEdges().get(edgeId);
 			if (
 				castedEdge.getExtremoInicial().getId() == id ||
 				castedEdge.getExtremoFinal().getId() == id
