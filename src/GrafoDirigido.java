@@ -322,7 +322,36 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * {@inheritDoc}
 	 */
 	public Grafo clone(Grafo<V,L> g) {
-		return g;
+
+		// Se preparan los datos de entrada
+
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+
+		ArrayList<Vertice<V>> vertices = castedGraph.vertices(this);
+		LinkedHashMap<String, Vertice<V>> importedVertices =
+			new LinkedHashMap<String, Vertice<V>>();
+		for (Vertice<V> v : vertices) {
+			importedVertices.put(v.getId(), v);
+		}
+
+		ArrayList<Lado<L>> lados = castedGraph.lados(this);
+		LinkedHashMap<String, Lado<L>> importedEdges =
+			new LinkedHashMap<String, Lado<L>>();
+		for (Lado<L> l : lados) {
+			importedEdges.put(l.getId(), l);
+		}
+
+
+		// Se asignan los datos al clon
+
+		GrafoDirigido<V,L> newGraph = new GrafoDirigido<V,L>();
+		newGraph.setVertexCount(castedGraph.numeroDeVertices(this));
+		newGraph.setEdgeCount(castedGraph.numeroDeVertices(this));
+		newGraph.setVertices(importedVertices);
+		newGraph.setEdges(importedEdges);
+
+
+		return newGraph;
 	};
 
 	/**
