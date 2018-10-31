@@ -437,16 +437,51 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * Calcula el grado interior del vértice identificado por id en el grafo. En caso de que no exista ningún
 	 * vértice con ese identificador, se lanza la excepción NoSuchElementException.
 	 */
-	public int gradoInterior(Grafo<V,L> g, String id) {
-		return 0;
+	public int gradoInterior(Grafo<V,L> g, String id) throws NoSuchElementException {
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+
+		try {
+			if (!castedGraph.estaVertice(this, id)) {
+				throw new NoSuchElementException();
+			}
+		}
+		catch(NoSuchElementException e) {
+			System.out.println("El vértice especificado no existe");
+		}
+
+		int grado = 0;
+		ArrayList<Lado<L>> lados = castedGraph.lados(this);
+		for (Lado<L> l : lados) {
+			Arco<L> a = (Arco<L>)l;
+			if (a.getExtremoFinal().getId() == id) {
+				grado++;
+			}
+		}
+
+		return grado;
 	}
 
 	/**
 	 * Calcula el grado exterior del vértice identificado por id en el grafo. En caso de que no exista ningún
 	 * vértice con ese identificador, se lanza la excepción NoSuchElementException.
 	 */
-	public int gradoExterior(Grafo<V,L> g, String id) {
-		return 0;
+	public int gradoExterior(Grafo<V,L> g, String id) throws NoSuchElementException {
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+
+		if (!castedGraph.estaVertice(this, id)) {
+			throw new NoSuchElementException();
+		}
+
+		int grado = 0;
+		ArrayList<Lado<L>> lados = castedGraph.lados(this);
+		for (Lado<L> l : lados) {
+			Arco<L> a = (Arco<L>)l;
+			if (a.getExtremoFinal().getId() == id) {
+				grado++;
+			}
+		}
+
+		return grado;
 	}
 
 	/**
