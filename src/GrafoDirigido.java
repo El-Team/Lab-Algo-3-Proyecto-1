@@ -478,7 +478,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		ArrayList<Lado<L>> lados = castedGraph.lados(this);
 		for (Lado<L> l : lados) {
 			Arco<L> a = (Arco<L>)l;
-			if (a.getExtremoFinal().getId() == id) {
+			if (a.getExtremoInicial().getId() == id) {
 				grado++;
 			}
 		}
