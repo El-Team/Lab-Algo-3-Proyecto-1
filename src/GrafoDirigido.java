@@ -17,8 +17,8 @@ import java.util.NoSuchElementException;
 
 public class GrafoDirigido<V, L> implements Grafo<V, L> {
 
-	public int vertexCount;
-	public int edgeCount;
+	private int vertexCount;
+	private int edgeCount;
 	public LinkedHashMap<String, Vertice<V>> vertices;
 	public LinkedHashMap<String, Lado<L>> edges;
 	
@@ -83,11 +83,11 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 
 		// Cargar datos
 
-		this.vertexCount = Integer.parseInt(lines.get(3));
-		this.edgeCount = Integer.parseInt(lines.get(4));
+		this.setVertexCount(Integer.parseInt(lines.get(3)));
+		this.setEdgeCount(Integer.parseInt(lines.get(4)));
 
 		this.vertices = new LinkedHashMap<String, Vertice<V>>();
-		for (int i = 5; i < 5 + this.vertexCount; i++) {
+		for (int i = 5; i < 5 + this.getVertexCount(); i++) {
 			String[] vertexData = lines.get(i).split("\\s");
 			Vertice<V> v = new Vertice<V>(
 				vertexData[0],
@@ -97,7 +97,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		}
 
 		this.edges = new LinkedHashMap<String, Lado<L>>();
-		for (int i = 5 + this.vertexCount; i < lines.size() - 1; i++) {
+		for (int i = 5 + this.getVertexCount(); i < lines.size() - 1; i++) {
 			String[] edgeData = lines.get(i).split("\\s");
 			Vertice<V> v = new Vertice<V>(
 				edgeData[0],
