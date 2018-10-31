@@ -358,7 +358,14 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * {@inheritDoc}
 	 */
 	public String toString(Grafo<V,L> g) {
-		return "";
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+		String graphStr =
+			"Número de vértices: " + castedGraph.numeroDeVertices(this) + "\n" +
+			"Número de lados: " + castedGraph.numeroDeLados(this) + "\n" +
+			"Vertices:\n" + castedGraph.vertices(this).toString() + "\n" +
+			"Lados:\n" + castedGraph.vertices(this).toString();
+
+		return graphStr;
 	}
 
 	/**
