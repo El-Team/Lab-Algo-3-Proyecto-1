@@ -186,7 +186,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public Vertice<V> obtenerVertice(Grafo<V,L> g, String id) {
+	public Vertice<V> obtenerVertice(Grafo<V,L> g, String id) throws NoSuchElementException {
 		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 		Vertice<V> v = castedGraph.getVertices().get(id);
 		if (v == null) {
@@ -258,7 +258,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public int grado(Grafo<V,L> g, String id) {
+	public int grado(Grafo<V,L> g, String id) throws NoSuchElementException {
 		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 		int grado = 0;
 		if (!g.estaVertice(this, id)) {
@@ -279,7 +279,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public ArrayList<Vertice<V>> adyacentes(Grafo<V,L> g, String id) {
+	public ArrayList<Vertice<V>> adyacentes(Grafo<V,L> g, String id) throws NoSuchElementException {
 		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 		ArrayList<Vertice<V>> adyacentes = new ArrayList();
 		if (!g.estaVertice(this, id)) {
@@ -300,7 +300,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	/**
 	 * {@inheritDoc}
 	 */
-	public ArrayList<Lado<L>> incidentes(Grafo<V,L> g, String id) {
+	public ArrayList<Lado<L>> incidentes(Grafo<V,L> g, String id) throws NoSuchElementException {
 		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 		ArrayList<Lado<L>> incidentes = new ArrayList();
 		if (!g.estaVertice(this, id)) {
@@ -387,7 +387,15 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * Si el identificador id no lo posee ningún arco en el grafo, crea un nuevo arco y lo agrega en el grafo.
 	 * Retorna true en caso en que la inserción se lleva a cabo, false en contrario.
 	 */
-	public boolean agregarArco(Grafo<V,L> g, String id, L dato, double p, String vInicial, String vFinal) {
+	public boolean agregarArco(
+			Grafo<V,L> g,
+			String id,
+			L dato,
+			double p,
+			String vInicial,
+			String vFinal
+		)
+		throws NoSuchElementException {
 
 		try {
 			GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
@@ -424,7 +432,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * Devuelve el arco que tiene como identificador id. En caso de que no exista ningún arco con ese
 	 * identificador, se lanza la excepción NoSuchElementException.
 	 */
-	public Arco obtenerArco(Grafo<V,L> g, String id) throws NoSuchFieldException {
+	public Arco obtenerArco(Grafo<V,L> g, String id) throws NoSuchElementException {
 		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 		Arco<L> a = (Arco<L>)castedGraph.getEdges().get(id);
 		if (a == null) {
