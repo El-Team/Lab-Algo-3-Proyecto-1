@@ -51,6 +51,12 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	public void setEdgeCount(int m) {
 		this.edgeCount = m;
 	}
+	public void setVertices(LinkedHashMap<String, Vertice<V>> vertices) {
+		this.vertices = vertices;
+	}
+	public void setEdges(LinkedHashMap<String, Lado<L>> edges) {
+		this.edges = edges;
+	}
 
 	/**
 	 * {@inheritDoc}
