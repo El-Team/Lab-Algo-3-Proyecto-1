@@ -424,10 +424,13 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * Devuelve el arco que tiene como identificador id. En caso de que no exista ningún arco con ese
 	 * identificador, se lanza la excepción NoSuchElementException.
 	 */
-	public Arco obtenerArco(Grafo<V,L> g, String id) {
-		Vertice v1 = new Vertice<>("", "", 0);
-		Vertice v2 = new Vertice<>("", "", 0);
-		return new Arco<>("", "", 0, v1, v2);
+	public Arco obtenerArco(Grafo<V,L> g, String id) throws NoSuchFieldException {
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+		Arco<L> a = (Arco<L>)castedGraph.getEdges().get(id);
+		if (a == null) {
+			throw new NoSuchElementException();
+		}
+		return a;
 	}
 
 	/**
