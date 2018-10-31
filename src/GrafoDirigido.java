@@ -373,7 +373,14 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * Retorna true en caso en que la inserción se lleva a cabo, false en caso contrario.
 	 */
 	public boolean agregarArco(Grafo<V,L> g, Arco<L> a) {
-		return false;
+		try {
+			GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+			castedGraph.getEdges().put(a.getId(), a);
+		}
+		catch(Error e) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
