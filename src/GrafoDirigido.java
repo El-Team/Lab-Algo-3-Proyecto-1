@@ -388,7 +388,24 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * Retorna true en caso en que la inserción se lleva a cabo, false en contrario.
 	 */
 	public boolean agregarArco(Grafo<V,L> g, String id, L dato, double p, String vInicial, String vFinal) {
-		return false;
+
+		try {
+			GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+			if (
+				!g.estaVertice(this, vInicial) ||
+				!g.estaVertice(this, vFinal)
+			) {
+				throw new NoSuchElementException();
+			}
+			Vertice<V> vi = g.obtenerVertice(this, vInicial);
+			Vertice<V> vf = g.obtenerVertice(this, vFinal);
+			Arco<L> a = new Arco(id, dato, p, vi, vf);
+			castedGraph.getEdges().put(a.getId(), a);
+		}
+		catch(Error e) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
