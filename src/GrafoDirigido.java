@@ -440,13 +440,8 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	public int gradoInterior(Grafo<V,L> g, String id) throws NoSuchElementException {
 		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 
-		try {
-			if (!castedGraph.estaVertice(this, id)) {
-				throw new NoSuchElementException();
-			}
-		}
-		catch(NoSuchElementException e) {
-			System.out.println("El vértice especificado no existe");
+		if (!castedGraph.estaVertice(this, id)) {
+			throw new NoSuchElementException();
 		}
 
 		int grado = 0;
