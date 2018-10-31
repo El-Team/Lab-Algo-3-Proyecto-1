@@ -80,7 +80,9 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 			return false;
 		}
 
+
 		// Abrir archivo de texto
+
 		List<String> lines = null;
 		try {
 			lines = Files.readAllLines(
@@ -90,6 +92,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		}
 		catch(IOException e) {
 			e.printStackTrace();
+			return false;
 		}
 
 
@@ -98,7 +101,8 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		this.setVertexCount(Integer.parseInt(lines.get(3)));
 		this.setEdgeCount(Integer.parseInt(lines.get(4)));
 
-		this.vertices = new LinkedHashMap<String, Vertice<V>>();
+		LinkedHashMap<String, Vertice<V>> importedVertices =
+			new LinkedHashMap<String, Vertice<V>>();
 		for (int i = 5; i < 5 + this.getVertexCount(); i++) {
 			String[] vertexData = lines.get(i).split("\\s");
 			Vertice<V> v = new Vertice<V>(
@@ -106,17 +110,30 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 				(V)vertexData[1],
 				Double.parseDouble(vertexData[2])
 			);
+			importedVertices.put(vertexData[0], v);
 		}
+		this.setVertices(importedVertices);
 
-		this.edges = new LinkedHashMap<String, Lado<L>>();
+
+		LinkedHashMap<String, Lado<L>> importedEdges =
+			new LinkedHashMap<String, Lado<L>>();
 		for (int i = 5 + this.getVertexCount(); i < lines.size() - 1; i++) {
+
 			String[] edgeData = lines.get(i).split("\\s");
-			Vertice<V> v = new Vertice<V>(
+			Vertice<V> vi = this.obtenerVertice(this, edgeData[3]);
+			Vertice<V> vf = this.obtenerVertice(this, edgeData[4]);
+
+			Arco<L> e = new Arco<L>(
 				edgeData[0],
-				(V)edgeData[1],
-				Double.parseDouble(edgeData[2])
+				(L)edgeData[1],
+				Double.parseDouble(edgeData[2]),
+				vi,
+				vf
 			);
+			importedEdges.put(edgeData[0], e);
 		}
+		this.setEdges(importedEdges);
+
 
 		return true;
 	}
