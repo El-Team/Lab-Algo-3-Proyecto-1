@@ -519,11 +519,16 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		if (!castedGraph.estaVertice(this, id)) {
 			throw new NoSuchElementException();
 		}
-	
-		Vertice v = new Vertice<>("", "", 0);
-		ArrayList<Vertice<V>> a = new ArrayList<Vertice<V>>();
-		a.add(v);
-		return a;
-	}
 
+		ArrayList<Vertice<V>> predecesores = new ArrayList();
+		ArrayList<Lado<L>> lados = castedGraph.lados(this);
+		for (Lado<L> l : lados) {
+			Arco<L> a = (Arco<L>)l;
+			if (a.getExtremoFinal().getId() == id) {
+				predecesores.add(a.getExtremoInicial());
+			}
+		}
+
+		return predecesores;
+	}
 }
