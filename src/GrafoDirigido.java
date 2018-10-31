@@ -490,18 +490,36 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * Devuelve una lista con los vértices que sucesores del vértice con identificador id. En caso de que no
 	 * exista ningún vértice con ese identificador, se lanza la excepción NoSuchElementException.
 	 */
-	public ArrayList<Vertice<V>> sucesores(Grafo<V,L> g, String id) {
-		Vertice v = new Vertice<>("", "", 0);
-		ArrayList<Vertice<V>> a = new ArrayList<Vertice<V>>();
-		a.add(v);
-		return a;
+	public ArrayList<Vertice<V>> sucesores(Grafo<V,L> g, String id) throws NoSuchElementException {
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+
+		if (!castedGraph.estaVertice(this, id)) {
+			throw new NoSuchElementException();
+		}
+
+		ArrayList<Vertice<V>> sucesores = new ArrayList();
+		ArrayList<Lado<L>> lados = castedGraph.lados(this);
+		for (Lado<L> l : lados) {
+			Arco<L> a = (Arco<L>)l;
+			if (a.getExtremoInicial().getId() == id) {
+				sucesores.add(a.getExtremoFinal());
+			}
+		}
+
+		return sucesores;
 	}
 
 	/**
 	 * Devuelve una lista con los vértices predecesores del vértice con identificador id. En caso de que no
 	 * exista ningún vértice con ese identificador, se lanza la excepción NoSuchElementException.
 	 */
-	public ArrayList<Vertice<V>> predecesores(Grafo<V,L> g, String id) {
+	public ArrayList<Vertice<V>> predecesores(Grafo<V,L> g, String id) throws NoSuchElementException {
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+
+		if (!castedGraph.estaVertice(this, id)) {
+			throw new NoSuchElementException();
+		}
+	
 		Vertice v = new Vertice<>("", "", 0);
 		ArrayList<Vertice<V>> a = new ArrayList<Vertice<V>>();
 		a.add(v);
