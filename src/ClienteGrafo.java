@@ -40,17 +40,15 @@ public class ClienteGrafo {
 
 		List<String> parsedInput = new ArrayList();
 
-		if (input == "q") {
+		if (input.equals("q")) {
 			parsedInput.add("quit");
 		}
-		else if (input == "h") {
+		else if (input.equals("h")) {
 			parsedInput.add("help");
 		}
 		else {
 			// Entrada de la forma <método>([args...])
-			String regexStr =
-				"(B|D|S),(B|D|S),(D|N),[0-9]+,[0-9]+,((\\S)+\\s(\\S)+\\s[0-9]+,){" +
-				"}((\\S)+\\s(\\S)+\\s[0-9]+\\s(\\S)+\\s(\\S)+,){" + "}";
+			String regexStr = "hfasdjkf";
 			Pattern regexPattern = Pattern.compile(regexStr);
 			Matcher match = regexPattern.matcher(input);
 
@@ -145,20 +143,21 @@ public class ClienteGrafo {
 	 * interactuar con el grafo cargado
 	 */
 	private static void displayPrompt() {
-		while(sessionIsActive) {
+		Scanner reader = new Scanner(System.in);
 
+		while(sessionIsActive) {
 			// Pedir instrucción al usuario
-			Scanner reader = new Scanner(System.in);
 			System.out.println(
 				"Introduzca el nombre de la intruccion que desea ejecutar " +
-				"sobre el grafo importado tal cual aparece en la" +
+				"sobre el grafo importado tal cual aparece en la " +
 				"documentación o introduzca q para finalizar"
 			);
-			String nextCommand = reader.next();
+			String nextCommand = reader.next().trim();
 
 			// Ejecutar comando introducido
 			if (nextCommand != null) {
 				List<String> parsedCommand = parse(nextCommand);
+
 				if (parsedCommand.get(0) == "quit") {
 					sessionIsActive = false;
 				}
@@ -175,9 +174,11 @@ public class ClienteGrafo {
 					executeCommand(parsedCommand);
 				}
 			}
-
-			reader.close();
 		}
+
+		reader.close();
+		System.out.println("Пока!");
+		System.exit(0);
 	}
 
 	/**
