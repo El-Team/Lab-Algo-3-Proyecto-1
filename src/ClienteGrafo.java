@@ -8,8 +8,12 @@ import java.lang.IllegalArgumentException;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.util.List;
+import java.util.ArrayList;
 import java.nio.charset.Charset;
 import java.io.IOException;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class ClienteGrafo {
 
@@ -18,6 +22,65 @@ public class ClienteGrafo {
 	 */
 	private static Grafo g;
 	private static Boolean sessionIsActive = true;
+
+	/**
+	 * Imprime la documentación completa
+	 */
+	private static void printDocumentation() {
+		System.out.println("printDocumentation");
+	}
+
+	/**
+	 * Analiza la cadena de texto entrada por el usuario y de ser válida,
+	 * devuelve una lista cuya primera entrada representa el método a ejecutar
+	 * y de haber otras entradas estas representararán los argumentos que acepta
+	 * el método a ejecutar.
+	 */
+	private static List<String> parse(String input){
+
+		List<String> parsedInput = new ArrayList();
+
+		if (input == "q") {
+			parsedInput.add("quit");
+		}
+		else if (input == "h") {
+			parsedInput.add("help");
+		}
+		else {
+			// Entrada de la forma <método>([args...])
+			String regexStr =
+				"(B|D|S),(B|D|S),(D|N),[0-9]+,[0-9]+,((\\S)+\\s(\\S)+\\s[0-9]+,){" +
+				"}((\\S)+\\s(\\S)+\\s[0-9]+\\s(\\S)+\\s(\\S)+,){" + "}";
+			Pattern regexPattern = Pattern.compile(regexStr);
+			Matcher match = regexPattern.matcher(input);
+
+			if (match.matches()) {
+				int endOfCommand = input.indexOf("(");
+				String command = input.substring(0, endOfCommand);
+				parsedInput.add(command);
+
+				// Parsear argumentos en caso de que hayan
+				if (endOfCommand != (input.length() - 2)) {
+					String[] rawArgs =
+						input.substring(endOfCommand + 1, input.length()).split(",");
+					for (String arg : rawArgs) {
+						parsedInput.add(arg.trim());
+					}
+				}
+			}
+			else {
+				parsedInput.add("invalidInput");
+			}
+		}
+		return parsedInput;
+	}
+
+	/**
+	 * Cliente ejecutado cuando el usuario no pasa argumentos
+	 */
+	private static void executeCommand(List<String> parsedCommand) {
+		System.out.println("parsedCommand");
+	}
 
 	/**
 	 * Cliente ejecutado cuando el usuario no pasa argumentos
@@ -83,8 +146,37 @@ public class ClienteGrafo {
 	 */
 	private static void displayPrompt() {
 		while(sessionIsActive) {
-			System.out.println("prompt works");
-			sessionIsActive = false;
+
+			// Pedir instrucción al usuario
+			Scanner reader = new Scanner(System.in);
+			System.out.println(
+				"Introduzca el nombre de la intruccion que desea ejecutar " +
+				"sobre el grafo importado tal cual aparece en la" +
+				"documentación o introduzca q para finalizar"
+			);
+			String nextCommand = reader.next();
+
+			// Ejecutar comando introducido
+			if (nextCommand != null) {
+				List<String> parsedCommand = parse(nextCommand);
+				if (parsedCommand.get(0) == "quit") {
+					sessionIsActive = false;
+				}
+				else if (parsedCommand.get(0) == "help") {
+					printDocumentation();
+				}
+				else if (parsedCommand.get(0) == "invalidInput") {
+					System.out.println(
+						"Entrada inválida, introduzca \"h\" si desea ver la " +
+						"documentación"
+					);
+				}
+				else {
+					executeCommand(parsedCommand);
+				}
+			}
+
+			reader.close();
 		}
 	}
 
