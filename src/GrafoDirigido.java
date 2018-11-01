@@ -172,8 +172,11 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * {@inheritDoc}
 	 */
 	public boolean agregarVertice(Grafo<V,L> g, String id, V dato, double p) {
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+		if (castedGraph.estaVertice(this, id)) {
+			return false;
+		}
 		try {
-			GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 			Vertice<V> v = new Vertice<V>(id, dato, p);
 			castedGraph.getVertices().put(id, v);	
 		}
@@ -373,8 +376,14 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * Retorna true en caso en que la inserción se lleva a cabo, false en caso contrario.
 	 */
 	public boolean agregarArco(Grafo<V,L> g, Arco<L> a) {
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
+		for (Lado<L> l : castedGraph.lados(this)) {
+			Arco<L> castedEdge = (Arco<L>)l;
+			if (castedEdge.getId() == a.getId()) {
+				return false;
+			}
+		}
 		try {
-			GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 			castedGraph.getEdges().put(a.getId(), a);
 		}
 		catch(Error e) {
