@@ -116,7 +116,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 
 		LinkedHashMap<String, Lado<L>> importedEdges =
 			new LinkedHashMap<String, Lado<L>>();
-		for (int i = 5 + this.getVertexCount(); i < lines.size() - 1; i++) {
+		for (int i = 5 + this.getVertexCount(); i < lines.size(); i++) {
 
 			String[] edgeData = lines.get(i).split("\\s");
 			Vertice<V> vi = this.obtenerVertice(this, edgeData[3]);
@@ -365,7 +365,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 			"Número de vértices: " + castedGraph.numeroDeVertices(this) + "\n" +
 			"Número de lados: " + castedGraph.numeroDeLados(this) + "\n" +
 			"Vertices:\n" + castedGraph.vertices(this).toString() + "\n" +
-			"Lados:\n" + castedGraph.vertices(this).toString();
+			"Lados:\n" + castedGraph.lados(this).toString();
 
 		return graphStr;
 	}
