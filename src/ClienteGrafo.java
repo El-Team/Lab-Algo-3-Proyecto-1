@@ -48,7 +48,7 @@ public class ClienteGrafo {
 		}
 		else {
 			// Entrada de la forma <método>([args...])
-			String regexStr = "hfasdjkf";
+			String regexStr = "[a-zA-Z]{4,40}(\\()(,?\\s?\\S+){0,4}(\\))$";
 			Pattern regexPattern = Pattern.compile(regexStr);
 			Matcher match = regexPattern.matcher(input);
 
@@ -74,7 +74,7 @@ public class ClienteGrafo {
 	}
 
 	/**
-	 * Cliente ejecutado cuando el usuario no pasa argumentos
+	 * Recibe un comando con sus argumentos y se encarga de ejecutarlo
 	 */
 	private static void executeCommand(List<String> parsedCommand) {
 		System.out.println("parsedCommand");
@@ -152,7 +152,7 @@ public class ClienteGrafo {
 				"sobre el grafo importado tal cual aparece en la " +
 				"documentación o introduzca q para finalizar"
 			);
-			String nextCommand = reader.next().trim();
+			String nextCommand = reader.nextLine();
 
 			// Ejecutar comando introducido
 			if (nextCommand != null) {
