@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.lang.reflect.Method;
 
 public class ClienteGrafo {
 
@@ -77,10 +78,26 @@ public class ClienteGrafo {
 	}
 
 	/**
-	 * Recibe un comando con sus argumentos y se encarga de ejecutarlo
+	 * Recibe un comando con sus argumentos y se encarga de ejecutarlo,
+	 * retornando un booleano que indica si la ejecución se realizó exitosamente
 	 */
-	private static void executeCommand(List<String> parsedCommand) {
+	private static boolean executeCommand(List<String> parsedCommand) {
 		System.out.println("parsedCommand");
+		//Method method = g.getClass().getMethod();
+
+		if (parsedCommand.size() == 1) {
+
+		}
+		else if (parsedCommand.size() == 1) {
+
+		}
+		else if (parsedCommand.size() == 6) {
+
+		}
+		else {
+
+		}
+		return false;
 	}
 
 	/**
@@ -177,7 +194,19 @@ public class ClienteGrafo {
 					);
 				}
 				else {
-					executeCommand(parsedCommand);
+					if (executeCommand(parsedCommand)) {
+						System.out.println(g.getClass().getSimpleName());
+						System.out.println(
+							"Comando ejecutado con éxito\n" +
+							"Estado actual del grafo:\n" + g.toString(g)
+						);
+					}
+					else {
+						System.out.println(
+							"El comando introducido es incorrecto, verifique " +
+							"que usó la sintaxis correcta"
+						);
+					}
 				}
 			}
 		}
