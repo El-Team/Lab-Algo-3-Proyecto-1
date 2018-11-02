@@ -21,6 +21,9 @@ public class ClienteGrafo {
 	 * Instancia de Grafo que será manejada a través del cliente
 	 */
 	private static Grafo g;
+	private static String graphType;
+	private static String vertexType;
+	private static String edgeType;
 	private static Boolean sessionIsActive = true;
 
 	/**
@@ -102,8 +105,11 @@ public class ClienteGrafo {
 		}
 
 		// Obtener información básica
-		String vertexAndEdgeType = lines.get(0) + lines.get(1);
-		String graphType = lines.get(2);
+		graphType = lines.get(2);
+		vertexType = lines.get(0);
+		edgeType = lines.get(1);
+
+		String vertexAndEdgeType = vertexType + edgeType;
 		String n = lines.get(3);
 		String m = lines.get(4);
 
@@ -148,9 +154,9 @@ public class ClienteGrafo {
 		while(sessionIsActive) {
 			// Pedir instrucción al usuario
 			System.out.println(
-				"Introduzca el nombre de la intruccion que desea ejecutar " +
+				"\nIntroduzca el nombre de la intrucción que desea ejecutar " +
 				"sobre el grafo importado tal cual aparece en la " +
-				"documentación o introduzca q para finalizar"
+				"documentación o introduzca \"q\" para finalizar"
 			);
 			String nextCommand = reader.nextLine();
 
@@ -177,7 +183,7 @@ public class ClienteGrafo {
 		}
 
 		reader.close();
-		System.out.println("Пока!");
+		System.out.println("Пока! 👋😊");
 		System.exit(0);
 	}
 
