@@ -157,13 +157,14 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	 * {@inheritDoc}
 	 */
 	public boolean agregarVertice(Grafo<V,L> g, Vertice<V> v) {
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 		try {
-			GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 			castedGraph.getVertices().put(v.getId(), v);
 		}
 		catch(Error e) {
 			return false;
 		}
+		castedGraph.setVertexCount(castedGraph.getVertexCount() + 1);
 		return true;
 	}
 
@@ -182,6 +183,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		catch(Error e) {
 			return false;
 		}
+		castedGraph.setVertexCount(castedGraph.getVertexCount() + 1);
 		return true;
 	}
 
@@ -228,6 +230,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	public boolean eliminarVertice(Grafo<V,L> g, String id) {
 		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 		if (castedGraph.getVertices().remove(id) != null) {
+			castedGraph.setVertexCount(castedGraph.getVertexCount() - 1);
 			return true;
 		}
 		return false;
@@ -388,6 +391,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		catch(Error e) {
 			return false;
 		}
+		castedGraph.setEdgeCount(castedGraph.getEdgeCount() + 1);
 		return true;
 	}
 
@@ -404,8 +408,8 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 			String vFinal
 		) {
 
+		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 		try {
-			GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 			if (
 				!g.estaVertice(this, vInicial) ||
 				!g.estaVertice(this, vFinal)
@@ -420,6 +424,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		catch(Error e) {
 			return false;
 		}
+		castedGraph.setEdgeCount(castedGraph.getEdgeCount() + 1);
 		return true;
 	}
 
@@ -430,6 +435,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	public boolean eliminarArco(Grafo<V,L> g, String id) {
 		GrafoDirigido<V,L> castedGraph = (GrafoDirigido<V,L>)g;
 		if (castedGraph.getEdges().remove(id) != null) {
+			castedGraph.setEdgeCount(castedGraph.getEdgeCount() - 1);
 			return true;
 		}
 		return false;
