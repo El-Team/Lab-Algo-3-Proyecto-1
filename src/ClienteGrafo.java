@@ -90,7 +90,7 @@ public class ClienteGrafo {
 	 * Recibe un comando con sus argumentos y se encarga de ejecutarlo,
 	 * retornando un diccionario que contiene la siguiente información: <br>
 	 * commandExecutedSuccessfully: booleano que indica si el comando se
-	 * ejecutó sin problemas
+	 * ejecutó sin problemas <br>
 	 * requiresToPrintCurrentGraph: booleano que indica si el comando requiere
 	 * que se imprima el estado del grafo
 	 *
@@ -101,6 +101,13 @@ public class ClienteGrafo {
 		LinkedHashMap result = new LinkedHashMap();
 		result.put("requiresToPrintCurrentGraph", false);
 
+		// Para los comandos:
+		// numeroDeVertices()
+		// numeroDeLados()
+		// vertices()
+		// lados()
+		// toString()
+		// clone()
 		if (parsedCommand.size() == 1) {
 			try {
 				Method method = g.getClass().getMethod(command, Grafo.class);
@@ -127,14 +134,60 @@ public class ClienteGrafo {
 			}
 		}
 
+		// Para los comandos:
+		// eliminarVertice(<id>)
+		// eliminarArco(<id>)
+		// eliminarArista(<id>)
 		else if (parsedCommand.size() == 2) {
-
+			try {
+				Method method = g.getClass().getMethod(
+					command,
+					Grafo.class,
+					String.class
+				);
+				String arg1 = parsedCommand.get(1);
+				System.out.println(arg1);
+				if (
+					command.equals("eliminarVertice") ||
+					command.equals("eliminarArco") ||
+					command.equals("eliminarArista")
+				) {
+					if ((Boolean)method.invoke(g, g, arg1)) {
+						System.out.println("El elemento ha sido eliminado");
+						result.put("requiresToPrintCurrentGraph", true);
+					}
+					else {
+						System.out.println(
+							"No se encontró el elemento que se deseaba eliminar"
+						);
+					}
+				}
+				else {
+					System.out.println(method.invoke(g, g, arg1).toString());
+				}
+				result.put("commandExecutedSuccessfully", true);
+			}
+			catch(NoSuchMethodException e) {
+				System.out.println("NoSuchMethodException");
+				result.put("commandExecutedSuccessfully", false);
+			}
+			catch(IllegalAccessException e) {
+				System.out.println("IllegalAccessException");
+				result.put("commandExecutedSuccessfully", false);
+			}
+			catch(InvocationTargetException e) {
+				System.out.println("InvocationTargetException");
+				result.put("commandExecutedSuccessfully", false);
+			}
 		}
 
+		// Para los comandos:
+		//
 		else if (parsedCommand.size() == 6) {
 
 		}
 
+		// Comando inválido:
 		else {
 			result.put("commandExecutedSuccessfully", false);
 		}
