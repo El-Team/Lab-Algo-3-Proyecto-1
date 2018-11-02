@@ -114,7 +114,7 @@ public class ClienteGrafo {
 		String m = lines.get(4);
 
 		// Inicializar grafo acorde al tipo
-		if (graphType == "D") {
+		if (graphType.equals("D")) {
 			switch (vertexAndEdgeType) {
 				case "BB": g = new GrafoDirigido<Boolean, Boolean>(); break;
 				case "BD": g = new GrafoDirigido<Boolean, Double>(); break;
