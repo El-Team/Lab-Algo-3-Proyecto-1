@@ -15,6 +15,10 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.lang.reflect.Method;
+import java.lang.IllegalAccessException;
+import java.lang.NoSuchMethodException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.LinkedHashMap;
 
 public class ClienteGrafo {
 
@@ -79,14 +83,43 @@ public class ClienteGrafo {
 
 	/**
 	 * Recibe un comando con sus argumentos y se encarga de ejecutarlo,
-	 * retornando un booleano que indica si la ejecución se realizó exitosamente
+	 * retornando un diccionario que contiene la siguiente información: <br>
+	 * commandExecutedSuccessfully: booleano que indica si el comando se
+	 * ejecutó sin problemas
+	 * requiresToPrintCurrentGraph: booleano que indica si el comando requiere
+	 * que se imprima el estado del grafo
+	 *
 	 */
-	private static boolean executeCommand(List<String> parsedCommand) {
-		System.out.println("parsedCommand");
-		//Method method = g.getClass().getMethod();
+	private static LinkedHashMap<String, Boolean> executeCommand(List<String> parsedCommand) {
+		System.out.println(" 	parsedCommand");
+		String command = parsedCommand.get(0);
+		LinkedHashMap result = new LinkedHashMap();
+		result.put("requiresToPrintCurrentGraph", false);
 
 		if (parsedCommand.size() == 1) {
-
+			try {
+				Method method = g.getClass().getMethod(command, Grafo.class);
+				if (command.equals("clone")) {
+					Grafo clone = (Grafo)method.invoke(g, g);
+					System.out.println("Grafo clonado:\n" + clone.toString(clone));
+				}
+				else {
+					System.out.println(method.invoke(g, g).toString());
+				}
+			}
+			catch(NoSuchMethodException e) {
+				System.out.println("NoSuchMethodException");
+				result.put("commandExecutedSuccessfully", false);
+			}
+			catch(IllegalAccessException e) {
+				System.out.println("IllegalAccessException");
+				result.put("commandExecutedSuccessfully", false);
+			}
+			catch(InvocationTargetException e) {
+				System.out.println("InvocationTargetException");
+				result.put("commandExecutedSuccessfully", false);
+			}
+			result.put("commandExecutedSuccessfully", true);
 		}
 		else if (parsedCommand.size() == 1) {
 
@@ -95,9 +128,10 @@ public class ClienteGrafo {
 
 		}
 		else {
-
+			result.put("commandExecutedSuccessfully", false);
 		}
-		return false;
+
+		return result;
 	}
 
 	/**
@@ -194,12 +228,16 @@ public class ClienteGrafo {
 					);
 				}
 				else {
-					if (executeCommand(parsedCommand)) {
-						System.out.println(g.getClass().getSimpleName());
-						System.out.println(
-							"Comando ejecutado con éxito\n" +
-							"Estado actual del grafo:\n" + g.toString(g)
-						);
+					LinkedHashMap<String, Boolean> execResult = executeCommand(parsedCommand);
+
+					if (execResult.get("commandExecutedSuccessfully")) {
+						System.out.println("Comando ejecutado con éxito");
+
+						if (execResult.get("requiresToPrintCurrentGraph")) {
+							System.out.println(
+								"Estado actual del grafo:\n" + g.toString(g)
+							);
+						}
 					}
 					else {
 						System.out.println(
