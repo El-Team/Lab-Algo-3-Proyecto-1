@@ -91,7 +91,7 @@ public class ClienteGrafo {
 	 *
 	 */
 	private static LinkedHashMap<String, Boolean> executeCommand(List<String> parsedCommand) {
-		System.out.println(" 	parsedCommand");
+
 		String command = parsedCommand.get(0);
 		LinkedHashMap result = new LinkedHashMap();
 		result.put("requiresToPrintCurrentGraph", false);
@@ -106,6 +106,7 @@ public class ClienteGrafo {
 				else {
 					System.out.println(method.invoke(g, g).toString());
 				}
+				result.put("commandExecutedSuccessfully", true);
 			}
 			catch(NoSuchMethodException e) {
 				System.out.println("NoSuchMethodException");
@@ -119,14 +120,16 @@ public class ClienteGrafo {
 				System.out.println("InvocationTargetException");
 				result.put("commandExecutedSuccessfully", false);
 			}
-			result.put("commandExecutedSuccessfully", true);
 		}
-		else if (parsedCommand.size() == 1) {
+
+		else if (parsedCommand.size() == 2) {
 
 		}
+
 		else if (parsedCommand.size() == 6) {
 
 		}
+
 		else {
 			result.put("commandExecutedSuccessfully", false);
 		}
