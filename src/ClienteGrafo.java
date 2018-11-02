@@ -67,8 +67,12 @@ public class ClienteGrafo {
 
 				// Parsear argumentos en caso de que hayan
 				if (endOfCommand != (input.length() - 2)) {
-					String[] rawArgs =
-						input.substring(endOfCommand + 1, input.length()).split(",");
+					String[] rawArgs = input
+						.substring(
+							endOfCommand + 1,
+							input.length() - 1
+						)
+						.split(",");
 					for (String arg : rawArgs) {
 						parsedInput.add(arg.trim());
 					}
@@ -78,6 +82,7 @@ public class ClienteGrafo {
 				parsedInput.add("invalidInput");
 			}
 		}
+
 		return parsedInput;
 	}
 
