@@ -29,6 +29,8 @@ public class GrafoNoDirigido<V, L> implements Grafo<V, L> {
 	public <V,L>GrafoNoDirigido() {
 		this.vertexCount = 0;
 		this.edgeCount = 0;
+		this.vertices = new LinkedHashMap();
+		this.edges = new LinkedHashMap();
 	}
 
 	/**

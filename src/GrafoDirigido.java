@@ -27,6 +27,8 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	public <V,L>GrafoDirigido() {
 		this.vertexCount = 0;
 		this.edgeCount = 0;
+		this.vertices = new LinkedHashMap();
+		this.edges = new LinkedHashMap();
 	}
 
 	/**
