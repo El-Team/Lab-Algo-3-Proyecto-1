@@ -36,7 +36,30 @@ public class ClienteGrafo {
 	 * Imprime la documentación completa
 	 */
 	private static void printDocumentation() {
-		System.out.println("printDocumentation");
+		System.out.println(
+			"El cliente soporta los siguientes comandos:\n" +
+			"    clone()\n" +
+			"    numeroDeVertices()\n" +
+			"    numeroDeLados()\n" +
+			"    vertices()\n" +
+			"    lados()\n" +
+			"    toString()\n" +
+			"    estaVertice(<id>)\n" +
+			"    eliminarVertice(<id>)\n" +
+			"    eliminarArco(<id>)\n" +
+			"    eliminarArista(<id>)\n" +
+			"    obtenerVertice(<id>)\n" +
+			"    grado(<id>)\n" +
+			"    gradoInterior(<id>)\n" +
+			"    gradoExterior(<id>)\n" +
+			"    adyacentes(<id>)\n" +
+			"    incidentes(<id>)\n" +
+			"    obtenerArco(<id>)\n" +
+			"    obtenerArista(<id>)\n" +
+			"    sucesores(<id>)\n" +
+			"    predecesores(<id>)\n" +
+			"    estaLado(<v1>, <v2>)"
+		);
 	}
 
 	/**
