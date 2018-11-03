@@ -19,6 +19,7 @@ import java.lang.IllegalAccessException;
 import java.lang.NoSuchMethodException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
+import java.util.NoSuchElementException;
 
 public class ClienteGrafo {
 
@@ -101,20 +102,23 @@ public class ClienteGrafo {
 		LinkedHashMap result = new LinkedHashMap();
 		result.put("requiresToPrintCurrentGraph", false);
 
-		// Para los comandos:
-		// numeroDeVertices()
-		// numeroDeLados()
-		// vertices()
-		// lados()
-		// toString()
-		// clone()
 		if (parsedCommand.size() == 1) {
+
 			try {
 				Method method = g.getClass().getMethod(command, Grafo.class);
+
+				// Para los comandos:
+				// clone()
 				if (command.equals("clone")) {
 					Grafo clone = (Grafo)method.invoke(g, g);
 					System.out.println("Grafo clonado:\n" + clone.toString(clone));
 				}
+				// Para los comandos:
+				// numeroDeVertices()
+				// numeroDeLados()
+				// vertices()
+				// lados()
+				// toString()
 				else {
 					System.out.println(method.invoke(g, g).toString());
 				}
@@ -134,10 +138,6 @@ public class ClienteGrafo {
 			}
 		}
 
-		// Para los comandos:
-		// eliminarVertice(<id>)
-		// eliminarArco(<id>)
-		// eliminarArista(<id>)
 		else if (parsedCommand.size() == 2) {
 			try {
 				Method method = g.getClass().getMethod(
@@ -147,7 +147,17 @@ public class ClienteGrafo {
 				);
 				String arg1 = parsedCommand.get(1);
 				System.out.println(arg1);
-				if (
+
+				// Para los comandos:
+				// estaVertice(<id>)
+				if (command.equals("eliminarVertice")) {
+					System.out.println(method.invoke(g, g, arg1).toString());
+				}
+				// Para los comandos:
+				// eliminarVertice(<id>)
+				// eliminarArco(<id>)
+				// eliminarArista(<id>)
+				else if (
 					command.equals("eliminarVertice") ||
 					command.equals("eliminarArco") ||
 					command.equals("eliminarArista")
@@ -162,8 +172,26 @@ public class ClienteGrafo {
 						);
 					}
 				}
+				// Para los comandos:
+				// obtenerVertice(<id>)
+				// grado(<id>)
+				// gradoInterior(<id>)
+				// gradoExterior(<id>)
+				// adyacentes(<id>)
+				// incidentes(<id>)
+				// obtenerArco(<id>)
+				// obtenerArista(<id>)
+				// sucesores(<id>)
+				// predecesores(<id>)
 				else {
-					System.out.println(method.invoke(g, g, arg1).toString());
+					try {
+						System.out.println(method.invoke(g, g, arg1).toString());
+					}
+					catch(InvocationTargetException e) {
+						System.out.println(
+							"No se encontró el elemento especificado en el argumento"
+						);
+					}
 				}
 				result.put("commandExecutedSuccessfully", true);
 			}
