@@ -515,7 +515,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		ArrayList<Lado<L>> lados = castedGraph.lados(this);
 		for (Lado<L> l : lados) {
 			Arco<L> a = (Arco<L>)l;
-			if (a.getExtremoInicial().getId() == id) {
+			if (a.getExtremoInicial().getId().equals(id)) {
 				sucesores.add(a.getExtremoFinal());
 			}
 		}
@@ -538,7 +538,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		ArrayList<Lado<L>> lados = castedGraph.lados(this);
 		for (Lado<L> l : lados) {
 			Arco<L> a = (Arco<L>)l;
-			if (a.getExtremoFinal().getId() == id) {
+			if (a.getExtremoFinal().getId().equals(id)) {
 				predecesores.add(a.getExtremoInicial());
 			}
 		}
