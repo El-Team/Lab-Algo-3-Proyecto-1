@@ -14,8 +14,6 @@ import java.io.IOException;
 import java.lang.Integer;
 import java.util.NoSuchElementException;
 
-
-
 public class GrafoNoDirigido<V, L> implements Grafo<V, L> {
 
 	private int vertexCount;

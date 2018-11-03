@@ -337,9 +337,6 @@ public class ClienteGrafo {
 		edgeType = Character.toString(input.charAt(6));
 		String vertexAndEdgeType = vertexType + edgeType;
 
-		System.out.println(graphType);
-		System.out.println(vertexAndEdgeType);
-
 		initializeGraph(graphType, vertexAndEdgeType);
 	}
 
