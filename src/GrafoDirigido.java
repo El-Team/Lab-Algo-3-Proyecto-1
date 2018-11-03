@@ -215,8 +215,8 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		for (String edgeId : castedGraph.getEdges().keySet()) {
 			Arco<L> castedEdge = (Arco<L>)castedGraph.getEdges().get(edgeId);
 			if (
-				castedEdge.getExtremoInicial().getId() == u &&
-				castedEdge.getExtremoFinal().getId() == v
+				castedEdge.getExtremoInicial().getId().equals(u) &&
+				castedEdge.getExtremoFinal().getId().equals(v)
 			) {
 				return true;
 			}
