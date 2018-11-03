@@ -278,7 +278,7 @@ public class ClienteGrafo {
 		System.out.println("No argument");
 	}
 
-	private static void createGraph(String filename) {
+	private static void createGraphFrom(String filename) {
 
 		// Abrir archivo de texto
 		List<String> lines = null;
@@ -422,7 +422,7 @@ public class ClienteGrafo {
 			System.exit(0);
 		}
 
-		createGraph(filename);
+		createGraphFrom(filename);
 		displayPrompt();
 	}
 
