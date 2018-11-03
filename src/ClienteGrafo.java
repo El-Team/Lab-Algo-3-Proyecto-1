@@ -82,7 +82,9 @@ public class ClienteGrafo {
 			"    obtenerArista(<id>)\n" +
 			"    sucesores(<id>)\n" +
 			"    predecesores(<id>)\n" +
-			"    estaLado(<v1>, <v2>)"
+			"    estaLado(<v1>, <v2>)\n" +
+			"    agregarArco(<id>, <dato>, <peso>, <vInicial>, <vFinal>)\n" +
+			"    agregarArista(<id>, <dato>, <peso>, <v1>, <v2>)"
 		);
 	}
 
@@ -272,6 +274,78 @@ public class ClienteGrafo {
 				// estaLado(<v1>, <v2>)
 				System.out.println(method.invoke(g, g, arg1, arg2).toString());
 				result.put("commandExecutedSuccessfully", true);
+			}
+			catch(NoSuchMethodException e) {
+				System.out.println("NoSuchMethodException");
+				result.put("commandExecutedSuccessfully", false);
+			}
+			catch(IllegalAccessException e) {
+				System.out.println("IllegalAccessException");
+				result.put("commandExecutedSuccessfully", false);
+			}
+			catch(InvocationTargetException e) {
+				System.out.println("InvocationTargetException");
+				result.put("commandExecutedSuccessfully", false);
+			}
+		}
+
+		// Comandos que toman 5 argumentos
+		else if (parsedCommand.size() == 6) {
+			try {
+				Method method = null;
+				switch(edgeType) {
+					case "B":
+						method = g.getClass().getMethod(
+							command,
+							Grafo.class,
+							String.class,
+							Boolean.class,
+							Double.class,
+							String.class,
+							String.class
+						);
+						break;
+					case "D":
+						method = g.getClass().getMethod(
+							command,
+							Grafo.class,
+							String.class,
+							Double.class,
+							Double.class,
+							String.class,
+							String.class
+						);
+						break;
+					case "S":
+						method = g.getClass().getMethod(
+							command,
+							Grafo.class,
+							String.class,
+							String.class,
+							Double.class,
+							String.class,
+							String.class
+						);
+						break;
+				}
+
+				String arg1 = parsedCommand.get(1);
+				String arg2 = parsedCommand.get(2);
+				String arg3 = parsedCommand.get(3);
+				String arg4 = parsedCommand.get(4);
+				String arg5 = parsedCommand.get(5);
+
+				// Para los comandos:
+				// agregarArco(<id>, <dato>, <peso>, <vInicial>, <vFinal>)
+				// agregarArista(<id>, <dato>, <peso>, <v1>, <v2>)
+				if ((Boolean)method.invoke(g, g, arg1, arg2, arg3, arg4, arg5)) {
+					System.out.println("Lado agregado con éxito");
+				}
+				else {
+					System.out.println("El nuevo lado no pudo ser agregado");
+				}
+				result.put("commandExecutedSuccessfully", true);
+				result.put("requiresToPrintCurrentGraph", true);
 			}
 			catch(NoSuchMethodException e) {
 				System.out.println("NoSuchMethodException");
