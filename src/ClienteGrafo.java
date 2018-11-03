@@ -20,6 +20,7 @@ import java.lang.NoSuchMethodException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
+import java.lang.Character;
 
 public class ClienteGrafo {
 
@@ -27,10 +28,33 @@ public class ClienteGrafo {
 	 * Instancia de Grafo que será manejada a través del cliente
 	 */
 	private static Grafo g;
+	/**
+	 * Tipo de grafo (D para dirigido, N para no dirigido)
+	 */
 	private static String graphType;
+	/**
+	 * Tipo del dato del véritce (D para doble, B para booleano, S para cadena
+	 * de texto)
+	 */
 	private static String vertexType;
+	/**
+	 * Tipo del dato del lado (D para doble, B para booleano, S para cadena de
+	 * texto)
+	 */
 	private static String edgeType;
+	/**
+	 * Denota si la cónsola para comandos debe mostrarse
+	 */
 	private static Boolean sessionIsActive = true;
+	/**
+	 * Denota si la cónsola para especificar tipo de grafo debe mostrarse
+	 */
+	private static Boolean sessionForNoArgumentsIsActive = true;
+	/**
+	 * Lector para los comandos que introducirá el usuario
+	 */
+	private static Scanner reader = new Scanner(System.in);
+
 
 	/**
 	 * Imprime la documentación completa
@@ -63,7 +87,7 @@ public class ClienteGrafo {
 	}
 
 	/**
-	 * Analiza la cadena de texto entrada por el usuario y de ser válida,
+	 * Analiza la cadena de texto introducida por el usuario y de ser válida,
 	 * devuelve una lista cuya primera entrada representa el método a ejecutar
 	 * y de haber otras entradas estas representararán los argumentos que acepta
 	 * el método a ejecutar.
@@ -303,11 +327,49 @@ public class ClienteGrafo {
 		}
 	}
 
+	private static void createEmptyGraph(String input) {
+		
+		graphType = Character.toString(input.charAt(0));
+		vertexType = Character.toString(input.charAt(3));
+		edgeType = Character.toString(input.charAt(6));
+		String vertexAndEdgeType = vertexType + edgeType;
+
+		initializeGraph(graphType, vertexAndEdgeType);
+
+		sessionForNoArgumentsIsActive = false;
+	}
+
+
 	/**
 	 * Cliente ejecutado cuando el usuario no pasa argumentos
 	 */
 	private static void displayClientForNoArguments() {
-		System.out.println("No argument");
+
+		while(sessionForNoArgumentsIsActive) {
+
+			// Pedir instrucción al usuario
+			System.out.println(
+				"\nPara comenzar introduzca el tipo de grafo que desea crear " +
+				"usando la siguiente sintaxis:\n" +
+				"    <tipoDeGrafo>, <tipoDeVertice>, <tipoDeLado>\n"
+			);
+			String nextCommand = reader.nextLine();
+
+			// Ejecutar comando introducido
+			if (nextCommand != null) {
+				String regexStr = "(N|D),\\s(B|D|S),\\s(B|D|S)$";
+				Pattern regexPattern = Pattern.compile(regexStr);
+				Matcher match = regexPattern.matcher(nextCommand);
+
+				if (match.matches()) {
+					createEmptyGraph(nextCommand);
+				}
+				else {
+					System.out.println("Entrada inválida");
+				}
+			}
+		}
+		displayPrompt();
 	}
 
 	/**
@@ -346,7 +408,6 @@ public class ClienteGrafo {
 	 * interactuar con el grafo cargado
 	 */
 	private static void displayPrompt() {
-		Scanner reader = new Scanner(System.in);
 
 		while(sessionIsActive) {
 			// Pedir instrucción al usuario
