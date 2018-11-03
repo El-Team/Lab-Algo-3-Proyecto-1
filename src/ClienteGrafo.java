@@ -272,36 +272,9 @@ public class ClienteGrafo {
 	}
 
 	/**
-	 * Cliente ejecutado cuando el usuario no pasa argumentos
+	 * Crea un grafo vacío y lo asigna a g
 	 */
-	private static void displayClientForNoArguments() {
-		System.out.println("No argument");
-	}
-
-	private static void createGraphFrom(String filename) {
-
-		// Abrir archivo de texto
-		List<String> lines = null;
-		try {
-			lines = Files.readAllLines(
-				Paths.get(filename),
-				Charset.defaultCharset()
-			);
-		}
-		catch(IOException e) {
-			e.printStackTrace();
-		}
-
-		// Obtener información básica
-		graphType = lines.get(2);
-		vertexType = lines.get(0);
-		edgeType = lines.get(1);
-
-		String vertexAndEdgeType = vertexType + edgeType;
-		String n = lines.get(3);
-		String m = lines.get(4);
-
-		// Inicializar grafo acorde al tipo
+	private static void initializeGraph(String graphType, String vertexAndEdgeType) {
 		if (graphType.equals("D")) {
 			switch (vertexAndEdgeType) {
 				case "BB": g = new GrafoDirigido<Boolean, Boolean>(); break;
@@ -328,7 +301,43 @@ public class ClienteGrafo {
 				case "SS": g = new GrafoNoDirigido<String, String>(); break;
 			}
 		}
+	}
 
+	/**
+	 * Cliente ejecutado cuando el usuario no pasa argumentos
+	 */
+	private static void displayClientForNoArguments() {
+		System.out.println("No argument");
+	}
+
+	/**
+	 * Crea un grafo a partir de un archivo de texto
+	 */
+	private static void createGraphFrom(String filename) {
+
+		// Abrir archivo de texto
+		List<String> lines = null;
+		try {
+			lines = Files.readAllLines(
+				Paths.get(filename),
+				Charset.defaultCharset()
+			);
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+
+		// Obtener información básica
+		graphType = lines.get(2);
+		vertexType = lines.get(0);
+		edgeType = lines.get(1);
+
+		String vertexAndEdgeType = vertexType + edgeType;
+		String n = lines.get(3);
+		String m = lines.get(4);
+
+		// Inicializar y cargar grafo acorde al tipo
+		initializeGraph(graphType, vertexAndEdgeType);
 		g.cargarGrafo(g, filename);
 	}
 
