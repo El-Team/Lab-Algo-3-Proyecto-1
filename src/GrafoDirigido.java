@@ -292,10 +292,10 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		}
 		for (String edgeId : castedGraph.getEdges().keySet()) {
 			Arco<L> castedEdge = (Arco<L>)castedGraph.getEdges().get(edgeId);
-			if (castedEdge.getExtremoInicial().getId() == id) {
+			if (castedEdge.getExtremoInicial().getId().equals(id)) {
 				adyacentes.add(castedEdge.getExtremoFinal());
 			}
-			if (castedEdge.getExtremoFinal().getId() == id) {
+			if (castedEdge.getExtremoFinal().getId().equals(id)) {
 				adyacentes.add(castedEdge.getExtremoInicial());
 			}
 		}
@@ -314,8 +314,8 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		for (String edgeId : castedGraph.getEdges().keySet()) {
 			Arco<L> castedEdge = (Arco<L>)castedGraph.getEdges().get(edgeId);
 			if (
-				castedEdge.getExtremoInicial().getId() == id ||
-				castedEdge.getExtremoFinal().getId() == id
+				castedEdge.getExtremoInicial().getId().equals(id) ||
+				castedEdge.getExtremoFinal().getId().equals(id)
 			) {
 				incidentes.add(castedEdge);
 			}
