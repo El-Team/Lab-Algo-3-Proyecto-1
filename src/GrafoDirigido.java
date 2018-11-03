@@ -20,7 +20,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 	private int edgeCount;
 	private LinkedHashMap<String, Vertice<V>> vertices;
 	private LinkedHashMap<String, Lado<L>> edges;
-	
+
 	/**
 	 * Crea un nuevo GrafoDirigido
 	 */
@@ -178,7 +178,7 @@ public class GrafoDirigido<V, L> implements Grafo<V, L> {
 		}
 		try {
 			Vertice<V> v = new Vertice<V>(id, dato, p);
-			castedGraph.getVertices().put(id, v);	
+			castedGraph.getVertices().put(id, v);
 		}
 		catch(Error e) {
 			return false;

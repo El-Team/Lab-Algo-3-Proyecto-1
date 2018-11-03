@@ -6,9 +6,9 @@
 public class Arista<E> extends Lado<E> {
 
 	/** Vertice extremo 1 del Arista**/
-	private Vertice<E> u;
+	private Vertice u;
 	/** Vertice extremo 2 del Arista**/
-	private Vertice<E> v;
+	private Vertice v;
 
 	/** Constructor del TAD Arista: 
 	* 		@param id 	representa el identificador
@@ -17,7 +17,7 @@ public class Arista<E> extends Lado<E> {
 	* 		@param vi 	{@link Vertice} extremo 1
 	* 		@param vf 	{@link Vertice} extremo 2
 	*/
-	public Arista(String id, E dato, double p, Vertice<E> u, Vertice<E> v) {
+	public Arista(String id, E dato, double p, Vertice u, Vertice v) {
 		super(id, dato, p);
 		this.u = u;
 		this.v = v;
@@ -26,14 +26,14 @@ public class Arista<E> extends Lado<E> {
 	/** Obtiene el {@link Vertice} del primer extremo del Arista
 	* 		@return 	Vertice del primer extremo
 	*/
-	public Vertice<E> getExtremo1() {
+	public Vertice getExtremo1() {
 		return this.u;
 	}
 
 	/** Obtiene el {@link Vertice} del segundo extermo del Arista
 	* 		@return 	Vertice del segundo extremo
 	*/
-	public Vertice<E> getExtremo2() {
+	public Vertice getExtremo2() {
 		return this.v;
 	}
 

@@ -180,7 +180,7 @@ public class ClienteGrafo {
 				result.put("commandExecutedSuccessfully", false);
 			}
 			catch(InvocationTargetException e) {
-				System.out.println("InvocationTargetException");
+				System.out.println("InvocationTargetException" + e.getCause());
 				result.put("commandExecutedSuccessfully", false);
 			}
 		}
@@ -300,6 +300,9 @@ public class ClienteGrafo {
 	 */
 	private static void initializeGraph(String graphType, String vertexAndEdgeType) {
 		if (graphType.equals("D")) {
+
+			System.out.println("is of type dirigido");
+
 			switch (vertexAndEdgeType) {
 				case "BB": g = new GrafoDirigido<Boolean, Boolean>(); break;
 				case "BD": g = new GrafoDirigido<Boolean, Double>(); break;
@@ -328,15 +331,16 @@ public class ClienteGrafo {
 	}
 
 	private static void createEmptyGraph(String input) {
-		
+
 		graphType = Character.toString(input.charAt(0));
 		vertexType = Character.toString(input.charAt(3));
 		edgeType = Character.toString(input.charAt(6));
 		String vertexAndEdgeType = vertexType + edgeType;
 
-		initializeGraph(graphType, vertexAndEdgeType);
+		System.out.println(graphType);
+		System.out.println(vertexAndEdgeType);
 
-		sessionForNoArgumentsIsActive = false;
+		initializeGraph(graphType, vertexAndEdgeType);
 	}
 
 
@@ -363,6 +367,7 @@ public class ClienteGrafo {
 
 				if (match.matches()) {
 					createEmptyGraph(nextCommand);
+					sessionForNoArgumentsIsActive = false;
 				}
 				else {
 					System.out.println("Entrada inválida");
