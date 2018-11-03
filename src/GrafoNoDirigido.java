@@ -279,6 +279,13 @@ public class GrafoNoDirigido<V, L> implements Grafo<V, L> {
 			) {
 				grado++;
 			}
+			// Caso bucles
+			if (
+				castedEdge.getExtremo1().getId().equals(id) &&
+				castedEdge.getExtremo2().getId().equals(id)
+			) {
+				grado++;
+			}
 		}
 		return grado;
 	}
