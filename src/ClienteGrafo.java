@@ -102,8 +102,8 @@ public class ClienteGrafo {
 		LinkedHashMap result = new LinkedHashMap();
 		result.put("requiresToPrintCurrentGraph", false);
 
+		// Comandos que no toman argumentos
 		if (parsedCommand.size() == 1) {
-
 			try {
 				Method method = g.getClass().getMethod(command, Grafo.class);
 
@@ -138,6 +138,7 @@ public class ClienteGrafo {
 			}
 		}
 
+		// Comandos que toman un argumento
 		else if (parsedCommand.size() == 2) {
 			try {
 				Method method = g.getClass().getMethod(
@@ -146,7 +147,6 @@ public class ClienteGrafo {
 					String.class
 				);
 				String arg1 = parsedCommand.get(1);
-				System.out.println(arg1);
 
 				// Para los comandos:
 				// estaVertice(<id>)
@@ -209,10 +209,35 @@ public class ClienteGrafo {
 			}
 		}
 
-		// Para los comandos:
-		//
-		else if (parsedCommand.size() == 6) {
+		// Comandos que toman dos argumentos
+		else if (parsedCommand.size() == 3) {
+			try {
+				Method method = g.getClass().getMethod(
+					command,
+					Grafo.class,
+					String.class,
+					String.class
+				);
+				String arg1 = parsedCommand.get(1);
+				String arg2 = parsedCommand.get(2);
 
+				// Para los comandos:
+				// estaLado(<v1>, <v2>)
+				System.out.println(method.invoke(g, g, arg1, arg2).toString());
+				result.put("commandExecutedSuccessfully", true);
+			}
+			catch(NoSuchMethodException e) {
+				System.out.println("NoSuchMethodException");
+				result.put("commandExecutedSuccessfully", false);
+			}
+			catch(IllegalAccessException e) {
+				System.out.println("IllegalAccessException");
+				result.put("commandExecutedSuccessfully", false);
+			}
+			catch(InvocationTargetException e) {
+				System.out.println("InvocationTargetException");
+				result.put("commandExecutedSuccessfully", false);
+			}
 		}
 
 		// Comando inválido:
