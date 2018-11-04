@@ -21,6 +21,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedHashMap;
 import java.util.NoSuchElementException;
 import java.lang.Character;
+import java.lang.Double;
+import java.lang.Boolean;
 
 public class ClienteGrafo {
 
@@ -83,6 +85,7 @@ public class ClienteGrafo {
 			"    sucesores(<id>)\n" +
 			"    predecesores(<id>)\n" +
 			"    estaLado(<v1>, <v2>)\n" +
+			"    agregarVertice(<id>, <dato>, <peso>)\n" +
 			"    agregarArco(<id>, <dato>, <peso>, <vInicial>, <vFinal>)\n" +
 			"    agregarArista(<id>, <dato>, <peso>, <v1>, <v2>)"
 		);
@@ -289,6 +292,45 @@ public class ClienteGrafo {
 			}
 		}
 
+		// Comandos que toman 3 argumentos
+		else if (parsedCommand.size() == 4) {
+			try {
+				Method method = null;
+				String arg1 = parsedCommand.get(1);
+				Double arg3 = Double.parseDouble(parsedCommand.get(3));
+				Boolean success = false;
+
+				// Para los comandos:
+				// agregarVertice(<id>, <dato>, <peso>)
+				switch(vertexType) {
+					case "B":
+						Boolean arg2B = Boolean.parseBoolean(parsedCommand.get(2));
+						success = g.agregarVertice(g, arg1, arg2B, arg3);
+						break;
+					case "D":
+						Double arg2D = Double.parseDouble(parsedCommand.get(2));
+						success = g.agregarVertice(g, arg1, arg2D, arg3);
+						break;
+					case "S":
+						String arg2S = parsedCommand.get(2);
+						success = g.agregarVertice(g, arg1, arg2S, arg3);
+						break;
+				}
+
+				if (success) {
+					System.out.println("Vértice agregado con éxito");
+				}
+				else {
+					System.out.println("El nuevo vértice no pudo ser agregado");
+				}
+				result.put("commandExecutedSuccessfully", true);
+				result.put("requiresToPrintCurrentGraph", true);
+			}
+			catch(Exception e) {
+				result.put("commandExecutedSuccessfully", false);
+			}
+		}
+
 		// Comandos que toman 5 argumentos
 		else if (parsedCommand.size() == 6) {
 			try {
@@ -374,9 +416,6 @@ public class ClienteGrafo {
 	 */
 	private static void initializeGraph(String graphType, String vertexAndEdgeType) {
 		if (graphType.equals("D")) {
-
-			System.out.println("is of type dirigido");
-
 			switch (vertexAndEdgeType) {
 				case "BB": g = new GrafoDirigido<Boolean, Boolean>(); break;
 				case "BD": g = new GrafoDirigido<Boolean, Double>(); break;
@@ -404,6 +443,9 @@ public class ClienteGrafo {
 		}
 	}
 
+	/**
+	 * Crea un grafo sin introducir datos
+	 */
 	private static void createEmptyGraph(String input) {
 
 		graphType = Character.toString(input.charAt(0));
@@ -413,7 +455,6 @@ public class ClienteGrafo {
 
 		initializeGraph(graphType, vertexAndEdgeType);
 	}
-
 
 	/**
 	 * Cliente ejecutado cuando el usuario no pasa argumentos
