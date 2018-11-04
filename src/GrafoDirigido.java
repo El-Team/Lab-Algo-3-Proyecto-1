@@ -16,9 +16,21 @@ import java.util.NoSuchElementException;
 
 public class GrafoDirigido<V, L> implements Grafo<V, L> {
 
+	/**
+	 * Número de vértices
+	 */
 	private int vertexCount;
+	/**
+	 * Número de arcos
+	 */
 	private int edgeCount;
+	/**
+	 * Diccionario que contiene a los vértices
+	 */
 	private LinkedHashMap<String, Vertice<V>> vertices;
+	/**
+	 * Diccionario que contiene a los arcos
+	 */
 	private LinkedHashMap<String, Lado<L>> edges;
 
 	/**
