@@ -109,7 +109,7 @@ public class ClienteGrafo {
 		}
 		else {
 			// Entrada de la forma <método>([args...])
-			String regexStr = "[a-zA-Z]{4,40}(\\()(,?\\s?\\S+){0,4}(\\))$";
+			String regexStr = "[a-zA-Z]{4,40}(\\()(,?\\s?\\S+){0,5}(\\))$";
 			Pattern regexPattern = Pattern.compile(regexStr);
 			Matcher match = regexPattern.matcher(input);
 
@@ -339,53 +339,90 @@ public class ClienteGrafo {
 		// Comandos que toman 5 argumentos
 		else if (parsedCommand.size() == 6) {
 			try {
-				Method method = null;
-				switch(edgeType) {
-					case "B":
-						method = g.getClass().getMethod(
-							command,
-							Grafo.class,
-							String.class,
-							Boolean.class,
-							Double.class,
-							String.class,
-							String.class
-						);
-						break;
-					case "D":
-						method = g.getClass().getMethod(
-							command,
-							Grafo.class,
-							String.class,
-							Double.class,
-							Double.class,
-							String.class,
-							String.class
-						);
-						break;
-					case "S":
-						method = g.getClass().getMethod(
-							command,
-							Grafo.class,
-							String.class,
-							String.class,
-							Double.class,
-							String.class,
-							String.class
-						);
-						break;
-				}
-
+				Boolean newElementAdded = false;
 				String arg1 = parsedCommand.get(1);
-				String arg2 = parsedCommand.get(2);
-				String arg3 = parsedCommand.get(3);
+				Double arg3 = Double.parseDouble(parsedCommand.get(3));
 				String arg4 = parsedCommand.get(4);
 				String arg5 = parsedCommand.get(5);
 
 				// Para los comandos:
 				// agregarArco(<id>, <dato>, <peso>, <vInicial>, <vFinal>)
 				// agregarArista(<id>, <dato>, <peso>, <v1>, <v2>)
-				if ((Boolean)method.invoke(g, g, arg1, arg2, arg3, arg4, arg5)) {
+				if (command.equals("agregarArco")) {
+					GrafoDirigido castedGraph = (GrafoDirigido)g;
+					switch(edgeType) {
+						case "B":
+							newElementAdded = castedGraph.agregarArco(
+								castedGraph,
+								arg1,
+								Boolean.parseBoolean(parsedCommand.get(2)),
+								arg3,
+								arg4,
+								arg5
+							);
+							break;
+						case "D":
+							newElementAdded = castedGraph.agregarArco(
+								castedGraph,
+								arg1,
+								Double.parseDouble(parsedCommand.get(2)),
+								arg3,
+								arg4,
+								arg5
+							);
+							break;
+						case "S":
+							newElementAdded = castedGraph.agregarArco(
+								castedGraph,
+								arg1,
+								parsedCommand.get(2),
+								arg3,
+								arg4,
+								arg5
+							);
+							break;
+					}
+				}
+				else if (command.equals("agregarArista")) {
+					GrafoNoDirigido castedGraph = (GrafoNoDirigido)g;
+					switch(edgeType) {
+						case "B":
+							newElementAdded = castedGraph.agregarArista(
+								castedGraph,
+								arg1,
+								Boolean.parseBoolean(parsedCommand.get(2)),
+								arg3,
+								arg4,
+								arg5
+							);
+							break;
+						case "D":
+							newElementAdded = castedGraph.agregarArista(
+								castedGraph,
+								arg1,
+								Double.parseDouble(parsedCommand.get(2)),
+								arg3,
+								arg4,
+								arg5
+							);
+							break;
+						case "S":
+							newElementAdded = castedGraph.agregarArista(
+								castedGraph,
+								arg1,
+								parsedCommand.get(2),
+								arg3,
+								arg4,
+								arg5
+							);
+							break;
+					}
+				}
+				else {
+					throw new NoSuchMethodException();
+				}
+
+				if (newElementAdded) {
 					System.out.println("Lado agregado con éxito");
 				}
 				else {
@@ -396,14 +433,6 @@ public class ClienteGrafo {
 			}
 			catch(NoSuchMethodException e) {
 				System.out.println("NoSuchMethodException");
-				result.put("commandExecutedSuccessfully", false);
-			}
-			catch(IllegalAccessException e) {
-				System.out.println("IllegalAccessException");
-				result.put("commandExecutedSuccessfully", false);
-			}
-			catch(InvocationTargetException e) {
-				System.out.println("InvocationTargetException");
 				result.put("commandExecutedSuccessfully", false);
 			}
 		}
