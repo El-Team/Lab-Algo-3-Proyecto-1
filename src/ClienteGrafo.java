@@ -295,29 +295,33 @@ public class ClienteGrafo {
 		// Comandos que toman 3 argumentos
 		else if (parsedCommand.size() == 4) {
 			try {
-				Method method = null;
 				String arg1 = parsedCommand.get(1);
 				Double arg3 = Double.parseDouble(parsedCommand.get(3));
-				Boolean success = false;
+				Boolean newElementAdded = false;
 
 				// Para los comandos:
 				// agregarVertice(<id>, <dato>, <peso>)
-				switch(vertexType) {
-					case "B":
-						Boolean arg2B = Boolean.parseBoolean(parsedCommand.get(2));
-						success = g.agregarVertice(g, arg1, arg2B, arg3);
-						break;
-					case "D":
-						Double arg2D = Double.parseDouble(parsedCommand.get(2));
-						success = g.agregarVertice(g, arg1, arg2D, arg3);
-						break;
-					case "S":
-						String arg2S = parsedCommand.get(2);
-						success = g.agregarVertice(g, arg1, arg2S, arg3);
-						break;
+				if (command.equals("agregarVertice")) {
+					switch(vertexType) {
+						case "B":
+							Boolean arg2B = Boolean.parseBoolean(parsedCommand.get(2));
+							newElementAdded = g.agregarVertice(g, arg1, arg2B, arg3);
+							break;
+						case "D":
+							Double arg2D = Double.parseDouble(parsedCommand.get(2));
+							newElementAdded = g.agregarVertice(g, arg1, arg2D, arg3);
+							break;
+						case "S":
+							String arg2S = parsedCommand.get(2);
+							newElementAdded = g.agregarVertice(g, arg1, arg2S, arg3);
+							break;
+					}
+				}
+				else {
+					throw new NoSuchMethodException();
 				}
 
-				if (success) {
+				if (newElementAdded) {
 					System.out.println("Vértice agregado con éxito");
 				}
 				else {
@@ -326,7 +330,8 @@ public class ClienteGrafo {
 				result.put("commandExecutedSuccessfully", true);
 				result.put("requiresToPrintCurrentGraph", true);
 			}
-			catch(Exception e) {
+			catch(NoSuchMethodException e) {
+				System.out.println("NoSuchMethodException");
 				result.put("commandExecutedSuccessfully", false);
 			}
 		}
