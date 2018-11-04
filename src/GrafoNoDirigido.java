@@ -21,7 +21,7 @@ public class GrafoNoDirigido<V, L> implements Grafo<V, L> {
 	 */
 	private int vertexCount;
 	/**
-	 * Número de arcos
+	 * Número de aristas
 	 */
 	private int edgeCount;
 	/**
@@ -29,7 +29,7 @@ public class GrafoNoDirigido<V, L> implements Grafo<V, L> {
 	 */
 	private LinkedHashMap<String, Vertice<V>> vertices;
 	/**
-	 * Diccionario que contiene a los arcos
+	 * Diccionario que contiene a las aristas
 	 */
 	private LinkedHashMap<String, Lado<L>> edges;
 
